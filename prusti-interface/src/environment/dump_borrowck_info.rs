@@ -32,12 +32,13 @@ use crate::environment::mir_utils::RealEdges;
 pub fn dump_borrowck_info(env: &Environment<'_>, procedures: &[ProcedureDefId]) {
     trace!("[dump_borrowck_info] enter");
 
-    let printer = InfoPrinter { env, tcx: env.tcx() };
+    // let printer = InfoPrinter { env, tcx: env.tcx() };
     //intravisit::walk_crate(&mut printer, tcx.hir.krate());
     //tcx.hir.krate().visit_all_item_likes(&mut printer);
 
     for def_id in procedures {
-        printer.print_info(*def_id);
+        crate::environment::mir_dump::dump_mir_info(env, *def_id);
+        // printer.print_info(*def_id);
     }
 
     trace!("[dump_borrowck_info] exit");
