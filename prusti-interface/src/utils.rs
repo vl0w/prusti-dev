@@ -307,6 +307,10 @@ pub fn has_extern_spec_attr(attrs: &[ast::Attribute]) -> bool {
     has_prusti_attr(attrs, "extern_spec")
 }
 
+pub fn has_model_attr(attrs: &[ast::Attribute]) -> bool {
+    has_prusti_attr(attrs, "model_generator")
+}
+
 /// Read the value stored in a Prusti attribute (e.g. `prusti::<attr_name>="...")`.
 pub fn read_prusti_attrs(attr_name: &str, attrs: &[ast::Attribute]) -> Vec<String> {
     let mut strings = vec![];
