@@ -297,11 +297,11 @@
 <span class="comment">// License, v. 2.0. If a copy of the MPL was not distributed with this</span>
 <span class="comment">// file, You can obtain one at http://mozilla.org/MPL/2.0/.</span>
 
-<span class="kw">use</span> <a class="ident" href="../../../../../src/prusti_common/lib.rs.html#28"><span class="kw">crate</span>::config</a>;
 <span class="kw">use</span> <a class="ident" href="../../../../../prusti_common/vir/polymorphic_vir/index.html"><span class="kw">crate</span>::vir::polymorphic_vir</a> <span class="kw">as</span> <span class="ident">vir</span>;
 <span class="kw">use</span> <a class="ident" href="https://doc.rust-lang.org/nightly/std/collections/hash/map/struct.HashMap.html">std::collections::HashMap</a>;
 <span class="kw">use</span> <a class="ident" href="https://doc.rust-lang.org/nightly/core/mem/index.html">std::mem</a>;
 <span class="kw">use</span> <span class="ident">log::debug</span>;
+<span class="kw">use</span> <a class="ident" href="../../../../../itertools/trait.Itertools.html">itertools::Itertools</a>;
 
 <span class="doccomment">/// Optimizations currently done:</span>
 <span class="doccomment">///</span>
@@ -395,7 +395,7 @@
         });
 
         <span class="kw">if</span> <span class="kw-2">*</span><a class="ident" href="../../../../../src/prusti_common/vir/optimizations/methods/quantifier_fixer.rs.html#94">replacer</a>.<span class="ident">counter</span> <span class="op">&gt;</span> <a class="ident" href="../../../../../src/prusti_common/vir/optimizations/methods/quantifier_fixer.rs.html#93">old_counter</a> {
-            <span class="kw">for</span> (<span class="ident">expr</span>, <span class="ident">variable</span>) <span class="kw">in</span> <a class="ident" href="../../../../../src/prusti_common/vir/optimizations/methods/quantifier_fixer.rs.html#94">replacer</a>.<span class="ident">map</span> {
+            <span class="kw">for</span> (<span class="ident">expr</span>, <span class="ident">variable</span>) <span class="kw">in</span> <a class="ident" href="../../../../../src/prusti_common/vir/optimizations/methods/quantifier_fixer.rs.html#94">replacer</a>.<span class="ident">map</span>.<a class="ident" href="https://doc.rust-lang.org/nightly/core/iter/traits/collect/trait.IntoIterator.html">into_iter</a>().<a class="ident" href="../../../../../itertools/trait.Itertools.html">sorted</a>() {
                 <a class="ident" href="../../../../../src/prusti_common/vir/optimizations/methods/quantifier_fixer.rs.html#97">forall</a> <span class="op">=</span> <span class="ident">vir::Expr::LetExpr</span>( <a class="ident" href="../../../../../prusti_common/vir/polymorphic_vir/struct.LetExpr.html">vir::LetExpr</a> {
                     <a class="ident" href="../../../../../src/prusti_common/vir/optimizations/methods/quantifier_fixer.rs.html#105">variable</a>,
                     <span class="ident">def</span>: <span class="kw">box</span> <a class="ident" href="../../../../../src/prusti_common/vir/optimizations/methods/quantifier_fixer.rs.html#105">expr</a>,
