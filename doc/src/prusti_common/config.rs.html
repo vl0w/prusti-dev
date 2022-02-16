@@ -517,6 +517,11 @@
 <span id="512">512</span>
 <span id="513">513</span>
 <span id="514">514</span>
+<span id="515">515</span>
+<span id="516">516</span>
+<span id="517">517</span>
+<span id="518">518</span>
+<span id="519">519</span>
 </pre><pre class="rust"><code><span class="comment">// © 2019, ETH Zurich</span>
 <span class="comment">//</span>
 <span class="comment">// This Source Code Form is subject to the terms of the Mozilla Public</span>
@@ -526,7 +531,7 @@
 <span class="kw">pub</span> <span class="kw">mod</span> <a class="ident" href="../../src/prusti_common/config/commandline.rs.html#1-133">commandline</a>;
 
 <span class="kw">use</span> <a class="ident" href="../../src/prusti_common/config/commandline.rs.html#7-26"><span class="self">self</span>::commandline::CommandLine</a>;
-<span class="kw">use</span> <span class="ident">config_crate</span>::{<a class="ident" href="../../config/config/struct.Config.html">Config</a>, <a class="ident" href="../../config/env/struct.Environment.html">Environment</a>, <a class="ident" href="../../config/file/struct.File.html">File</a>, <a class="ident" href="../../config/file/format/enum.FileFormat.html">FileFormat</a>};
+<span class="kw">use</span> <span class="ident">config_crate</span>::{<a class="ident" href="../../config/config/struct.Config.html">Config</a>, <a class="ident" href="../../config/env/struct.Environment.html">Environment</a>, <a class="ident" href="../../config/file/struct.File.html">File</a>};
 <span class="kw">use</span> <a class="ident" href="../../serde/de/trait.Deserialize.html">serde::Deserialize</a>;
 <span class="kw">use</span> <span class="ident">std</span>::{<a class="ident" href="https://doc.rust-lang.org/nightly/std/collections/hash/set/struct.HashSet.html">collections::HashSet</a>, <a class="ident" href="https://doc.rust-lang.org/nightly/std/env/index.html">env</a>, <a class="ident" href="https://doc.rust-lang.org/nightly/std/path/struct.PathBuf.html">path::PathBuf</a>, <a class="ident" href="https://doc.rust-lang.org/nightly/std/sync/rwlock/struct.RwLock.html">sync::RwLock</a>};
 
@@ -585,6 +590,7 @@
         <a class="ident" href="../../src/prusti_common/config.rs.html#60">settings</a>.<span class="ident">set_default</span>(<span class="string">&quot;check_overflows&quot;</span>, <span class="bool-val">true</span>).<span class="ident">unwrap</span>();
         <a class="ident" href="../../src/prusti_common/config.rs.html#60">settings</a>.<span class="ident">set_default</span>(<span class="string">&quot;check_panics&quot;</span>, <span class="bool-val">true</span>).<span class="ident">unwrap</span>();
         <a class="ident" href="../../src/prusti_common/config.rs.html#60">settings</a>.<span class="ident">set_default</span>(<span class="string">&quot;encode_unsigned_num_constraint&quot;</span>, <span class="bool-val">false</span>).<span class="ident">unwrap</span>();
+        <a class="ident" href="../../src/prusti_common/config.rs.html#60">settings</a>.<span class="ident">set_default</span>(<span class="string">&quot;encode_bitvectors&quot;</span>, <span class="bool-val">false</span>).<span class="ident">unwrap</span>();
         <a class="ident" href="../../src/prusti_common/config.rs.html#60">settings</a>.<span class="ident">set_default</span>(<span class="string">&quot;simplify_encoding&quot;</span>, <span class="bool-val">true</span>).<span class="ident">unwrap</span>();
         <a class="ident" href="../../src/prusti_common/config.rs.html#60">settings</a>.<span class="ident">set_default</span>(<span class="string">&quot;log_dir&quot;</span>, <span class="string">&quot;log&quot;</span>).<span class="ident">unwrap</span>();
         <a class="ident" href="../../src/prusti_common/config.rs.html#60">settings</a>.<span class="ident">set_default</span>(<span class="string">&quot;cache_path&quot;</span>, <span class="string">&quot;&quot;</span>).<span class="ident">unwrap</span>();
@@ -633,38 +639,37 @@
 
         <span class="comment">// Get the list of all allowed flags.</span>
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">allowed_keys</span> <span class="op">=</span> <a class="ident" href="../../src/prusti_common/config.rs.html#154">get_keys</a>(<span class="kw-2">&amp;</span><a class="ident" href="../../src/prusti_common/config.rs.html#60">settings</a>);
-        <a class="ident" href="../../src/prusti_common/config.rs.html#116">allowed_keys</a>.<span class="ident">insert</span>(<span class="string">&quot;server_max_stored_verifiers&quot;</span>.<a class="ident" href="https://doc.rust-lang.org/nightly/alloc/string/trait.ToString.html">to_string</a>());
-        <a class="ident" href="../../src/prusti_common/config.rs.html#116">allowed_keys</a>.<span class="ident">insert</span>(<span class="string">&quot;server_max_concurrency&quot;</span>.<a class="ident" href="https://doc.rust-lang.org/nightly/alloc/string/trait.ToString.html">to_string</a>());
-        <a class="ident" href="../../src/prusti_common/config.rs.html#116">allowed_keys</a>.<span class="ident">insert</span>(<span class="string">&quot;server_address&quot;</span>.<a class="ident" href="https://doc.rust-lang.org/nightly/alloc/string/trait.ToString.html">to_string</a>());
-        <a class="ident" href="../../src/prusti_common/config.rs.html#116">allowed_keys</a>.<span class="ident">insert</span>(<span class="string">&quot;config&quot;</span>.<a class="ident" href="https://doc.rust-lang.org/nightly/alloc/string/trait.ToString.html">to_string</a>());
-        <a class="ident" href="../../src/prusti_common/config.rs.html#116">allowed_keys</a>.<span class="ident">insert</span>(<span class="string">&quot;log&quot;</span>.<a class="ident" href="https://doc.rust-lang.org/nightly/alloc/string/trait.ToString.html">to_string</a>());
-        <a class="ident" href="../../src/prusti_common/config.rs.html#116">allowed_keys</a>.<span class="ident">insert</span>(<span class="string">&quot;log_style&quot;</span>.<a class="ident" href="https://doc.rust-lang.org/nightly/alloc/string/trait.ToString.html">to_string</a>());
+        <a class="ident" href="../../src/prusti_common/config.rs.html#117">allowed_keys</a>.<span class="ident">insert</span>(<span class="string">&quot;server_max_stored_verifiers&quot;</span>.<a class="ident" href="https://doc.rust-lang.org/nightly/alloc/string/trait.ToString.html">to_string</a>());
+        <a class="ident" href="../../src/prusti_common/config.rs.html#117">allowed_keys</a>.<span class="ident">insert</span>(<span class="string">&quot;server_max_concurrency&quot;</span>.<a class="ident" href="https://doc.rust-lang.org/nightly/alloc/string/trait.ToString.html">to_string</a>());
+        <a class="ident" href="../../src/prusti_common/config.rs.html#117">allowed_keys</a>.<span class="ident">insert</span>(<span class="string">&quot;server_address&quot;</span>.<a class="ident" href="https://doc.rust-lang.org/nightly/alloc/string/trait.ToString.html">to_string</a>());
+        <a class="ident" href="../../src/prusti_common/config.rs.html#117">allowed_keys</a>.<span class="ident">insert</span>(<span class="string">&quot;config&quot;</span>.<a class="ident" href="https://doc.rust-lang.org/nightly/alloc/string/trait.ToString.html">to_string</a>());
+        <a class="ident" href="../../src/prusti_common/config.rs.html#117">allowed_keys</a>.<span class="ident">insert</span>(<span class="string">&quot;log&quot;</span>.<a class="ident" href="https://doc.rust-lang.org/nightly/alloc/string/trait.ToString.html">to_string</a>());
+        <a class="ident" href="../../src/prusti_common/config.rs.html#117">allowed_keys</a>.<span class="ident">insert</span>(<span class="string">&quot;log_style&quot;</span>.<a class="ident" href="https://doc.rust-lang.org/nightly/alloc/string/trait.ToString.html">to_string</a>());
 
-        <span class="comment">// 2. Override with the optional TOML file &quot;Prusti.toml&quot; (if there is any)</span>
+        <span class="comment">// 2. Override with default env variables (e.g. `DEFAULT_PRUSTI_CACHE_PATH`, ...)</span>
         <a class="ident" href="../../src/prusti_common/config.rs.html#60">settings</a>.<span class="ident">merge</span>(
-            <span class="ident">File::new</span>(<span class="string">&quot;Prusti.toml&quot;</span>, <span class="ident">FileFormat::Toml</span>).<span class="ident">required</span>(<span class="bool-val">false</span>)
+            <span class="ident">Environment::with_prefix</span>(<span class="string">&quot;DEFAULT_PRUSTI&quot;</span>).<span class="ident">ignore_empty</span>(<span class="bool-val">true</span>)
         ).<span class="ident">unwrap</span>();
-        <a class="ident" href="../../src/prusti_common/config.rs.html#165">check_keys</a>(<span class="kw-2">&amp;</span><a class="ident" href="../../src/prusti_common/config.rs.html#60">settings</a>, <span class="kw-2">&amp;</span><a class="ident" href="../../src/prusti_common/config.rs.html#116">allowed_keys</a>, <span class="string">&quot;Prusti.toml file&quot;</span>);
+        <a class="ident" href="../../src/prusti_common/config.rs.html#165">check_keys</a>(<span class="kw-2">&amp;</span><a class="ident" href="../../src/prusti_common/config.rs.html#60">settings</a>, <span class="kw-2">&amp;</span><a class="ident" href="../../src/prusti_common/config.rs.html#117">allowed_keys</a>, <span class="string">&quot;default environment variables&quot;</span>);
 
         <span class="comment">// 3. Override with an optional TOML file specified by the `PRUSTI_CONFIG` env variable</span>
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">file</span>) <span class="op">=</span> <span class="ident">env::var</span>(<span class="string">&quot;PRUSTI_CONFIG&quot;</span>) {
-            <span class="comment">// Since this file is explicitly specified by the user, it would be</span>
-            <span class="comment">// nice to tell them if we cannot open it.</span>
-            <a class="ident" href="../../src/prusti_common/config.rs.html#60">settings</a>.<span class="ident">merge</span>(<span class="ident">File::with_name</span>(<span class="kw-2">&amp;</span><a class="ident" href="../../src/prusti_common/config.rs.html#131">file</a>)).<span class="ident">unwrap</span>();
-            <a class="ident" href="../../src/prusti_common/config.rs.html#165">check_keys</a>(<span class="kw-2">&amp;</span><a class="ident" href="../../src/prusti_common/config.rs.html#60">settings</a>, <span class="kw-2">&amp;</span><a class="ident" href="../../src/prusti_common/config.rs.html#116">allowed_keys</a>, <span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">&quot;{} file&quot;</span>, <a class="ident" href="../../src/prusti_common/config.rs.html#131">file</a>));
-        }
+        <span class="kw">let</span> <span class="ident">file</span> <span class="op">=</span> <span class="ident">env::var</span>(<span class="string">&quot;PRUSTI_CONFIG&quot;</span>).<span class="ident">unwrap_or_else</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="string">&quot;./Prusti.toml&quot;</span>.<a class="ident" href="https://doc.rust-lang.org/nightly/alloc/string/trait.ToString.html">to_string</a>());
+        <span class="comment">// Since this file may explicitly be specified by the user, it would be</span>
+        <span class="comment">// nice to tell them if we cannot open it.</span>
+        <a class="ident" href="../../src/prusti_common/config.rs.html#60">settings</a>.<span class="ident">merge</span>(<span class="ident">File::with_name</span>(<span class="kw-2">&amp;</span><a class="ident" href="../../src/prusti_common/config.rs.html#132">file</a>).<span class="ident">required</span>(<span class="bool-val">false</span>)).<span class="ident">unwrap</span>();
+        <a class="ident" href="../../src/prusti_common/config.rs.html#165">check_keys</a>(<span class="kw-2">&amp;</span><a class="ident" href="../../src/prusti_common/config.rs.html#60">settings</a>, <span class="kw-2">&amp;</span><a class="ident" href="../../src/prusti_common/config.rs.html#117">allowed_keys</a>, <span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">&quot;{} file&quot;</span>, <a class="ident" href="../../src/prusti_common/config.rs.html#132">file</a>));
 
         <span class="comment">// 4. Override with env variables (`PRUSTI_VIPER_BACKEND`, ...)</span>
         <a class="ident" href="../../src/prusti_common/config.rs.html#60">settings</a>.<span class="ident">merge</span>(
             <span class="ident">Environment::with_prefix</span>(<span class="string">&quot;PRUSTI&quot;</span>).<span class="ident">ignore_empty</span>(<span class="bool-val">true</span>)
         ).<span class="ident">unwrap</span>();
-        <a class="ident" href="../../src/prusti_common/config.rs.html#165">check_keys</a>(<span class="kw-2">&amp;</span><a class="ident" href="../../src/prusti_common/config.rs.html#60">settings</a>, <span class="kw-2">&amp;</span><a class="ident" href="../../src/prusti_common/config.rs.html#116">allowed_keys</a>, <span class="string">&quot;environment variables&quot;</span>);
+        <a class="ident" href="../../src/prusti_common/config.rs.html#165">check_keys</a>(<span class="kw-2">&amp;</span><a class="ident" href="../../src/prusti_common/config.rs.html#60">settings</a>, <span class="kw-2">&amp;</span><a class="ident" href="../../src/prusti_common/config.rs.html#117">allowed_keys</a>, <span class="string">&quot;environment variables&quot;</span>);
 
         <span class="comment">// 5. Override with command-line arguments -P&lt;arg&gt;=&lt;val&gt;</span>
         <a class="ident" href="../../src/prusti_common/config.rs.html#60">settings</a>.<span class="ident">merge</span>(
             <span class="ident">CommandLine::with_prefix</span>(<span class="string">&quot;-P&quot;</span>).<a class="ident" href="../../src/prusti_common/config/commandline.rs.html#53">ignore_invalid</a>(<span class="bool-val">true</span>)
         ).<span class="ident">unwrap</span>();
-        <a class="ident" href="../../src/prusti_common/config.rs.html#165">check_keys</a>(<span class="kw-2">&amp;</span><a class="ident" href="../../src/prusti_common/config.rs.html#60">settings</a>, <span class="kw-2">&amp;</span><a class="ident" href="../../src/prusti_common/config.rs.html#116">allowed_keys</a>, <span class="string">&quot;command line arguments&quot;</span>);
+        <a class="ident" href="../../src/prusti_common/config.rs.html#165">check_keys</a>(<span class="kw-2">&amp;</span><a class="ident" href="../../src/prusti_common/config.rs.html#60">settings</a>, <span class="kw-2">&amp;</span><a class="ident" href="../../src/prusti_common/config.rs.html#117">allowed_keys</a>, <span class="string">&quot;command line arguments&quot;</span>);
 
         <a class="ident" href="../../src/prusti_common/config.rs.html#60">settings</a>
     });
@@ -812,6 +817,11 @@
     <a class="ident" href="../../src/prusti_common/config.rs.html#195-197">read_setting</a>(<span class="string">&quot;encode_unsigned_num_constraint&quot;</span>)
 }
 
+<span class="doccomment">/// Enable (highly hacky) support for bitvectors.</span>
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">encode_bitvectors</span>() -&gt; <a class="ident" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a> {
+    <a class="ident" href="../../src/prusti_common/config.rs.html#195-197">read_setting</a>(<span class="string">&quot;encode_bitvectors&quot;</span>)
+}
+
 <span class="doccomment">/// Location of &#39;libprusti_contracts*.rlib&#39;</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">contracts_lib</span>() -&gt; <a class="ident" href="https://doc.rust-lang.org/nightly/alloc/string/struct.String.html">String</a> {
     <a class="ident" href="../../src/prusti_common/config.rs.html#195-197">read_setting</a>(<span class="string">&quot;contracts_lib&quot;</span>)
@@ -946,24 +956,24 @@ It also doesn&#39;t make much sense to set this to less than that, since then th
 
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">opt</span> <span class="op">=</span> <span class="ident">Optimizations::all_disabled</span>();
 
-    <span class="kw">for</span> <span class="ident">s</span> <span class="kw">in</span> <a class="ident" href="../../src/prusti_common/config.rs.html#426">optimizations_string</a>.<span class="ident">split</span>(<span class="string">&#39;,&#39;</span>) {
-        <span class="kw">let</span> <span class="ident">trimmed</span> <span class="op">=</span> <a class="ident" href="../../src/prusti_common/config.rs.html#430">s</a>.<span class="ident">trim</span>();
-        <span class="kw">match</span> <a class="ident" href="../../src/prusti_common/config.rs.html#431">trimmed</a> {
-            <span class="string">&quot;all&quot;</span> =&gt; <a class="ident" href="../../src/prusti_common/config.rs.html#428">opt</a> <span class="op">=</span> <span class="ident">Optimizations::all_enabled</span>(),
-            <span class="string">&quot;inline_constant_functions&quot;</span> =&gt; <a class="ident" href="../../src/prusti_common/config.rs.html#428">opt</a>.<span class="ident">inline_constant_functions</span> <span class="op">=</span> <span class="bool-val">true</span>,
-            <span class="string">&quot;delete_unused_predicates&quot;</span> =&gt; <a class="ident" href="../../src/prusti_common/config.rs.html#428">opt</a>.<span class="ident">delete_unused_predicates</span> <span class="op">=</span> <span class="bool-val">true</span>,
-            <span class="string">&quot;optimize_folding&quot;</span> =&gt; <a class="ident" href="../../src/prusti_common/config.rs.html#428">opt</a>.<span class="ident">optimize_folding</span> <span class="op">=</span> <span class="bool-val">true</span>,
-            <span class="string">&quot;remove_empty_if&quot;</span> =&gt; <a class="ident" href="../../src/prusti_common/config.rs.html#428">opt</a>.<span class="ident">remove_empty_if</span> <span class="op">=</span> <span class="bool-val">true</span>,
-            <span class="string">&quot;purify_vars&quot;</span> =&gt; <a class="ident" href="../../src/prusti_common/config.rs.html#428">opt</a>.<span class="ident">purify_vars</span> <span class="op">=</span> <span class="bool-val">true</span>,
-            <span class="string">&quot;fix_quantifiers&quot;</span> =&gt; <a class="ident" href="../../src/prusti_common/config.rs.html#428">opt</a>.<span class="ident">fix_quantifiers</span> <span class="op">=</span> <span class="bool-val">true</span>,
-            <span class="string">&quot;remove_unused_vars&quot;</span> =&gt; <a class="ident" href="../../src/prusti_common/config.rs.html#428">opt</a>.<span class="ident">remove_unused_vars</span> <span class="op">=</span> <span class="bool-val">true</span>,
-            <span class="string">&quot;remove_trivial_assertions&quot;</span> =&gt; <a class="ident" href="../../src/prusti_common/config.rs.html#428">opt</a>.<span class="ident">remove_trivial_assertions</span> <span class="op">=</span> <span class="bool-val">true</span>,
-            <span class="string">&quot;clean_cfg&quot;</span> =&gt; <a class="ident" href="../../src/prusti_common/config.rs.html#428">opt</a>.<span class="ident">clean_cfg</span> <span class="op">=</span> <span class="bool-val">true</span>,
-            <span class="kw">_</span> =&gt; <span class="macro">warn!</span>(<span class="string">&quot;Ignoring Unkown optimization &#39;{}&#39;&quot;</span>, <a class="ident" href="../../src/prusti_common/config.rs.html#431">trimmed</a>),
+    <span class="kw">for</span> <span class="ident">s</span> <span class="kw">in</span> <a class="ident" href="../../src/prusti_common/config.rs.html#431">optimizations_string</a>.<span class="ident">split</span>(<span class="string">&#39;,&#39;</span>) {
+        <span class="kw">let</span> <span class="ident">trimmed</span> <span class="op">=</span> <a class="ident" href="../../src/prusti_common/config.rs.html#435">s</a>.<span class="ident">trim</span>();
+        <span class="kw">match</span> <a class="ident" href="../../src/prusti_common/config.rs.html#436">trimmed</a> {
+            <span class="string">&quot;all&quot;</span> =&gt; <a class="ident" href="../../src/prusti_common/config.rs.html#433">opt</a> <span class="op">=</span> <span class="ident">Optimizations::all_enabled</span>(),
+            <span class="string">&quot;inline_constant_functions&quot;</span> =&gt; <a class="ident" href="../../src/prusti_common/config.rs.html#433">opt</a>.<span class="ident">inline_constant_functions</span> <span class="op">=</span> <span class="bool-val">true</span>,
+            <span class="string">&quot;delete_unused_predicates&quot;</span> =&gt; <a class="ident" href="../../src/prusti_common/config.rs.html#433">opt</a>.<span class="ident">delete_unused_predicates</span> <span class="op">=</span> <span class="bool-val">true</span>,
+            <span class="string">&quot;optimize_folding&quot;</span> =&gt; <a class="ident" href="../../src/prusti_common/config.rs.html#433">opt</a>.<span class="ident">optimize_folding</span> <span class="op">=</span> <span class="bool-val">true</span>,
+            <span class="string">&quot;remove_empty_if&quot;</span> =&gt; <a class="ident" href="../../src/prusti_common/config.rs.html#433">opt</a>.<span class="ident">remove_empty_if</span> <span class="op">=</span> <span class="bool-val">true</span>,
+            <span class="string">&quot;purify_vars&quot;</span> =&gt; <a class="ident" href="../../src/prusti_common/config.rs.html#433">opt</a>.<span class="ident">purify_vars</span> <span class="op">=</span> <span class="bool-val">true</span>,
+            <span class="string">&quot;fix_quantifiers&quot;</span> =&gt; <a class="ident" href="../../src/prusti_common/config.rs.html#433">opt</a>.<span class="ident">fix_quantifiers</span> <span class="op">=</span> <span class="bool-val">true</span>,
+            <span class="string">&quot;remove_unused_vars&quot;</span> =&gt; <a class="ident" href="../../src/prusti_common/config.rs.html#433">opt</a>.<span class="ident">remove_unused_vars</span> <span class="op">=</span> <span class="bool-val">true</span>,
+            <span class="string">&quot;remove_trivial_assertions&quot;</span> =&gt; <a class="ident" href="../../src/prusti_common/config.rs.html#433">opt</a>.<span class="ident">remove_trivial_assertions</span> <span class="op">=</span> <span class="bool-val">true</span>,
+            <span class="string">&quot;clean_cfg&quot;</span> =&gt; <a class="ident" href="../../src/prusti_common/config.rs.html#433">opt</a>.<span class="ident">clean_cfg</span> <span class="op">=</span> <span class="bool-val">true</span>,
+            <span class="kw">_</span> =&gt; <span class="macro">warn!</span>(<span class="string">&quot;Ignoring Unkown optimization &#39;{}&#39;&quot;</span>, <a class="ident" href="../../src/prusti_common/config.rs.html#436">trimmed</a>),
         }
     }
 
-    <a class="ident" href="../../src/prusti_common/config.rs.html#428">opt</a>
+    <a class="ident" href="../../src/prusti_common/config.rs.html#433">opt</a>
 }
 
 <span class="doccomment">/// Enable purification optimization for impure functions.</span>
@@ -985,7 +995,7 @@ It also doesn&#39;t make much sense to set this to less than that, since then th
 <span class="doccomment">/// used for tests that aim to catch performance regressions.</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">verification_deadline</span>() -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><a class="ident" href="https://doc.rust-lang.org/nightly/std/primitive.u64.html">u64</a><span class="op">&gt;</span> {
     <span class="ident">read_setting</span>::<span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><a class="ident" href="https://doc.rust-lang.org/nightly/std/primitive.i64.html">i64</a><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="string">&quot;verification_deadline&quot;</span>).<span class="ident">map</span>(<span class="op">|</span><span class="ident">value</span><span class="op">|</span> {
-        <a class="ident" href="../../src/prusti_common/config.rs.html#468">value</a>.<a class="ident" href="https://doc.rust-lang.org/nightly/core/convert/trait.TryInto.html">try_into</a>().<span class="ident">expect</span>(<span class="string">&quot;verification_deadline must be a valid u64&quot;</span>)
+        <a class="ident" href="../../src/prusti_common/config.rs.html#473">value</a>.<a class="ident" href="https://doc.rust-lang.org/nightly/core/convert/trait.TryInto.html">try_into</a>().<span class="ident">expect</span>(<span class="string">&quot;verification_deadline must be a valid u64&quot;</span>)
     })
 }
 
