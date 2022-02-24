@@ -3,6 +3,7 @@ use crate::{span_overrider::SpanOverrider, specifications::common::NameGenerator
 use proc_macro2::TokenStream;
 use quote::quote_spanned;
 use std::collections::HashMap;
+use syn::parse_quote;
 use syn::spanned::Spanned;
 
 pub fn rewrite_extern_spec(item_impl: &syn::ItemImpl) -> syn::Result<TokenStream> {
@@ -10,18 +11,46 @@ pub fn rewrite_extern_spec(item_impl: &syn::ItemImpl) -> syn::Result<TokenStream
 
     let new_struct = rewritten.generated_struct;
     let new_impl = rewritten.generated_impl;
+    let new_trait = rewritten.generated_trait;
     Ok(quote_spanned! {item_impl.span()=>
+        #new_trait
         #new_struct
         #new_impl
     })
 }
 
+/// Errors that can happen during rewriting of extern impl specs.
+/// These are mostly wrong usages of the macro by the user.
+#[derive(Debug)]
+enum RewriteError {
+    CanNotGenerateStructName(proc_macro2::Span, String),
+    ImplsWithTraitSupportNoGenerics(proc_macro2::Span),
+    TraitObjectWithoutTrait(proc_macro2::Span),
+}
+
+impl std::convert::From<RewriteError> for syn::Error {
+    fn from(err: RewriteError) -> Self {
+        match err {
+            RewriteError::CanNotGenerateStructName(span, detailed_message) =>
+                syn::Error::new(span, detailed_message),
+            RewriteError::ImplsWithTraitSupportNoGenerics(span) =>
+                syn::Error::new(span, "Generics for extern trait impls are not supported"),
+            RewriteError::TraitObjectWithoutTrait(span) =>
+                syn::Error::new(span, "Must specify a trait in an extern spec involving trait objects"),
+        }
+    }
+}
+
+type ExternSpecImplRewriteResult<R> = Result<R, RewriteError>;
+
+#[derive(Debug)]
 struct RewrittenExternalSpecs {
     generated_struct: syn::ItemStruct,
     generated_impl: syn::ItemImpl,
+    generated_trait: Option<syn::ItemTrait>, // TODO: UGLY!
 }
 
-fn rewrite_extern_spec_internal(item_impl: &syn::ItemImpl) -> syn::Result<RewrittenExternalSpecs> {
+fn rewrite_extern_spec_internal(item_impl: &syn::ItemImpl) -> ExternSpecImplRewriteResult<RewrittenExternalSpecs> {
     let new_struct = generate_new_struct(item_impl)?;
     let struct_ident = &new_struct.ident;
     let generic_args = rewrite_generics(&new_struct.generics);
@@ -30,13 +59,55 @@ fn rewrite_extern_spec_internal(item_impl: &syn::ItemImpl) -> syn::Result<Rewrit
         #struct_ident #generic_args
     };
 
-    if item_impl.trait_.is_some() {
+    if let syn::Type::TraitObject(trait_object) = item_impl.self_ty.as_ref() {
+        if item_impl.trait_.is_none() {
+            return Err(RewriteError::TraitObjectWithoutTrait(item_impl.span()));
+        }
+
         let (_, trait_path, _) = item_impl.trait_.as_ref().unwrap();
         if has_generic_arguments(trait_path) {
-            return Err(syn::Error::new(
-                item_impl.generics.params.span(),
-                "Generics for extern trait impls are not supported",
-            ));
+            panic!(); // TODO
+        }
+
+        let mut traif_of_impl_assoc_types_map: HashMap<&syn::Ident, &syn::Type> = HashMap::new();
+        for item in &item_impl.items {
+            if let syn::ImplItem::Type(assoc_type) = item {
+                assert!(assoc_type.generics.params.is_empty()); // TODO: Error
+                assert!(assoc_type.attrs.is_empty()); // TODO: Error
+                assert!(assoc_type.defaultness.is_none()); // TODO: Error
+                let ident = &assoc_type.ident;
+                let ty = &assoc_type.ty;
+                traif_of_impl_assoc_types_map.insert(ident, ty);
+            }
+        }
+
+        // TODO: Collect associated types
+
+        let a = traif_of_impl_assoc_types_map.keys().clone();
+        let b = traif_of_impl_assoc_types_map.values().clone();
+        let mut trait_ : syn::ItemTrait = parse_quote!( // TODO: Naming
+            #[allow (non_camel_case_types)]
+            trait SuperTrait: #trait_path <#(#a = #b),*> {}
+        );
+        trait_.supertraits.extend(trait_object.bounds.clone());
+
+        let i = &trait_.ident;
+        let trait_as_ty: syn::Type = parse_quote!(dyn #i);
+
+        let rewritten_impl = rewrite_dyn_impl(item_impl.clone(), Box::from(struct_ty), Box::from(trait_as_ty))?;
+
+
+        Ok(RewrittenExternalSpecs{
+            generated_struct: new_struct,
+            generated_impl: rewritten_impl,
+            generated_trait: Some(trait_),
+        })
+    } else if item_impl.trait_.is_some() {
+        let (_, trait_path, _) = item_impl.trait_.as_ref().unwrap();
+        if has_generic_arguments(trait_path) {
+            return Err(
+                RewriteError::ImplsWithTraitSupportNoGenerics(item_impl.generics.params.span())
+            );
         }
 
         let rewritten_impl = rewrite_trait_impl(item_impl.clone(), Box::from(struct_ty))?;
@@ -44,6 +115,7 @@ fn rewrite_extern_spec_internal(item_impl: &syn::ItemImpl) -> syn::Result<Rewrit
         Ok(RewrittenExternalSpecs {
             generated_struct: new_struct,
             generated_impl: rewritten_impl,
+            generated_trait: None,
         })
     } else {
         let mut rewritten_item = item_impl.clone();
@@ -52,15 +124,18 @@ fn rewrite_extern_spec_internal(item_impl: &syn::ItemImpl) -> syn::Result<Rewrit
         Ok(RewrittenExternalSpecs {
             generated_struct: new_struct,
             generated_impl: rewritten_item,
+            generated_trait: None,
         })
     }
 }
 
-fn generate_new_struct(item_impl: &syn::ItemImpl) -> syn::Result<syn::ItemStruct> {
+fn generate_new_struct(item_impl: &syn::ItemImpl) -> ExternSpecImplRewriteResult<syn::ItemStruct> {
     let name_generator = NameGenerator::new();
     let struct_name = match name_generator.generate_struct_name(item_impl) {
         Ok(name) => name,
-        Err(msg) => return Err(syn::Error::new(item_impl.span(), msg)),
+        Err(msg) => return Err(
+            RewriteError::CanNotGenerateStructName(item_impl.span(), msg)
+        ),
     };
     let struct_ident = syn::Ident::new(&struct_name, item_impl.span());
 
@@ -75,7 +150,7 @@ fn generate_new_struct(item_impl: &syn::ItemImpl) -> syn::Result<syn::ItemStruct
 
 /// Rewrite all methods in an impl block to calls to the specified methods.
 /// The result of this rewriting is then parsed in `ExternSpecResolver`.
-fn rewrite_plain_impl(impl_item: &mut syn::ItemImpl, new_ty: Box<syn::Type>) -> syn::Result<()> {
+fn rewrite_plain_impl(impl_item: &mut syn::ItemImpl, new_ty: Box<syn::Type>) -> ExternSpecImplRewriteResult<()> {
     let item_ty = &mut impl_item.self_ty;
     if let syn::Type::Path(type_path) = item_ty.as_mut() {
         for seg in type_path.path.segments.iter_mut() {
@@ -94,10 +169,7 @@ fn rewrite_plain_impl(impl_item: &mut syn::ItemImpl, new_ty: Box<syn::Type>) -> 
                 // ignore
             }
             _ => {
-                return Err(syn::Error::new(
-                    item.span(),
-                    "expected a method".to_string(),
-                ));
+                unimplemented!("Expected a method when rewriting extern spec");
             }
         }
     }
@@ -106,10 +178,45 @@ fn rewrite_plain_impl(impl_item: &mut syn::ItemImpl, new_ty: Box<syn::Type>) -> 
     Ok(())
 }
 
+fn rewrite_dyn_impl(
+    impl_item: syn::ItemImpl,
+    struct_ty: Box<syn::Type>,
+    supertrait_ty: Box<syn::Type>,
+) -> ExternSpecImplRewriteResult<syn::ItemImpl> {
+    if let syn::Type::TraitObject(_) = *supertrait_ty {
+
+    } else {
+        todo!();
+    }
+
+    let mut new_impl = impl_item.clone();
+    new_impl.self_ty = struct_ty;
+    new_impl.trait_ = None;
+    new_impl.items.clear();
+
+    for item in impl_item.items.iter() {
+        if let syn::ImplItem::Method(method) = item {
+            let (_, trait_path, _) = &impl_item.trait_.as_ref().unwrap();
+
+            let mut rewritten_method = method.clone();
+            rewrite_method(&mut rewritten_method, supertrait_ty.as_ref(), Some(trait_path));
+
+            // Rewrite occurences of associated types in method signature
+            // TODO
+            // let mut rewriter = AssociatedTypeRewriter::new(&assoc_type_decls);
+            // rewriter.rewrite_method_sig(&mut rewritten_method.sig);
+
+            new_impl.items.push(syn::ImplItem::Method(rewritten_method));
+        }
+    }
+
+    Ok(new_impl)
+}
+
 fn rewrite_trait_impl(
     impl_item: syn::ItemImpl,
     new_ty: Box<syn::Type>,
-) -> syn::Result<syn::ItemImpl> {
+) -> ExternSpecImplRewriteResult<syn::ItemImpl> {
     let item_ty = impl_item.self_ty.clone();
 
     // Collect declared associated types
@@ -210,6 +317,107 @@ mod tests {
             actual.into_token_stream().to_string(),
             expected.into_token_stream().to_string()
         );
+    }
+
+    mod trait_object_impl {
+        use crate::extern_spec_rewriter::impls::RewriteError;
+        use super::*;
+
+        #[test]
+        fn trait_object_impl_without_trait_disallowed() {
+            let inp_impl: syn::ItemImpl = parse_quote!(
+                impl dyn Bar {}
+            );
+
+            let res= rewrite_extern_spec_internal(&inp_impl);
+            let err = res.expect_err("Expected error");
+            assert!(matches!(err, RewriteError::TraitObjectWithoutTrait(_)))
+        }
+
+        #[test]
+        fn generated_struct() {
+            let inp_impl: syn::ItemImpl = parse_quote!(
+                impl Foo for dyn Bar {}
+            );
+
+            let rewritten= rewrite_extern_spec_internal(&inp_impl).unwrap();
+
+            let struct_ident = &rewritten.generated_struct.ident;
+            let expected: syn::ItemStruct = parse_quote! {
+                #[allow (non_camel_case_types)]
+                struct #struct_ident (
+                );
+            };
+
+            assert_eq_tokenizable(rewritten.generated_struct, expected);
+        }
+
+        #[test]
+        fn generated_trait() {
+            let inp_impl: syn::ItemImpl = parse_quote!(
+                impl Foo for dyn Bar + Baz {}
+            );
+
+            let rewritten= rewrite_extern_spec_internal(&inp_impl).unwrap();
+
+            let generated_trait = rewritten.generated_trait.expect("Expected generated trait");
+            let generated_trait_ident = &generated_trait.ident;
+            let expected: syn::ItemTrait = parse_quote! {
+                #[allow (non_camel_case_types)]
+                trait #generated_trait_ident : Foo <> + Bar + Baz {}
+            };
+
+            assert_eq_tokenizable(generated_trait, expected);
+        }
+
+        #[test]
+        fn generated_trait_assoc_types() {
+            let inp_impl: syn::ItemImpl = parse_quote!(
+                impl Foo for dyn Bar<AssocBar=u32> + Baz<AssocBaz=i32> {
+                    type AssocFoo = i32;
+                }
+            );
+
+            let rewritten= rewrite_extern_spec_internal(&inp_impl).unwrap();
+
+            let generated_trait = rewritten.generated_trait.expect("Expected generated trait");
+            let generated_trait_ident = &generated_trait.ident;
+            let expected: syn::ItemTrait = parse_quote! {
+                #[allow (non_camel_case_types)]
+                trait #generated_trait_ident : Foo<AssocFoo=i32> + Bar<AssocBar=u32> + Baz<AssocBaz=i32> {}
+            };
+
+            assert_eq_tokenizable(generated_trait, expected);
+        }
+
+        #[test]
+        fn generated_impl_uses_new_supertrait() {
+            let inp_impl: syn::ItemImpl = parse_quote!(
+                impl Foo for dyn Bar {
+                    fn foo(&self) -> i32;
+                }
+            );
+
+            let rewritten= rewrite_extern_spec_internal(&inp_impl).unwrap();
+
+            let generated_trait = rewritten.generated_trait.expect("Expected generated trait");
+            let generated_trait_ident = &generated_trait.ident;
+            let generated_struct_ident = &rewritten.generated_struct.ident;
+
+            let expected: syn::ItemImpl = parse_quote!(
+                impl #generated_struct_ident <> {
+                    #[prusti::extern_spec]
+                    #[trusted]
+                    #[allow(dead_code)]
+                    fn foo(_self: &dyn #generated_trait_ident) -> i32 {
+                        <dyn #generated_trait_ident as Foo>::foo(_self, );
+                        unimplemented!()
+                    }
+                }
+            );
+
+            assert_eq_tokenizable(rewritten.generated_impl, expected);
+        }
     }
 
     mod plain_impl {
