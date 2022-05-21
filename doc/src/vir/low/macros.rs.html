@@ -3,7 +3,9 @@
         </a><h2 class="location"></h2>
     </nav>
     <nav class="sidebar"><a class="sidebar-logo" href="../../../vir/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
-        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../vir/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><div class="theme-picker hidden"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="22" height="22" alt="Pick another theme!" src="../../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../vir/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><div id="settings-menu" tabindex="-1">
+                                <a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div>
+                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -468,6 +470,52 @@
 <span id="463">463</span>
 <span id="464">464</span>
 <span id="465">465</span>
+<span id="466">466</span>
+<span id="467">467</span>
+<span id="468">468</span>
+<span id="469">469</span>
+<span id="470">470</span>
+<span id="471">471</span>
+<span id="472">472</span>
+<span id="473">473</span>
+<span id="474">474</span>
+<span id="475">475</span>
+<span id="476">476</span>
+<span id="477">477</span>
+<span id="478">478</span>
+<span id="479">479</span>
+<span id="480">480</span>
+<span id="481">481</span>
+<span id="482">482</span>
+<span id="483">483</span>
+<span id="484">484</span>
+<span id="485">485</span>
+<span id="486">486</span>
+<span id="487">487</span>
+<span id="488">488</span>
+<span id="489">489</span>
+<span id="490">490</span>
+<span id="491">491</span>
+<span id="492">492</span>
+<span id="493">493</span>
+<span id="494">494</span>
+<span id="495">495</span>
+<span id="496">496</span>
+<span id="497">497</span>
+<span id="498">498</span>
+<span id="499">499</span>
+<span id="500">500</span>
+<span id="501">501</span>
+<span id="502">502</span>
+<span id="503">503</span>
+<span id="504">504</span>
+<span id="505">505</span>
+<span id="506">506</span>
+<span id="507">507</span>
+<span id="508">508</span>
+<span id="509">509</span>
+<span id="510">510</span>
+<span id="511">511</span>
 </pre><pre class="rust"><code><span class="kw">pub</span> <span class="kw">macro</span> <span class="ident">ty</span> {
     (<span class="ident">Int</span>) =&gt; {<span class="macro-nonterminal">$</span><span class="macro-nonterminal">crate::low::ast::ty::Type::Int</span>},
     (<span class="ident">Bool</span>) =&gt; {<span class="macro-nonterminal">$</span><span class="macro-nonterminal">crate::low::ast::ty::Type::Bool</span>},
@@ -540,6 +588,20 @@
                 ),
                 <span class="ident">arguments</span>,
                 <span class="macro-nonterminal">$</span><span class="macro-nonterminal">crate::low::ast::expression::Expression::full_permission</span>(),
+            )
+        }
+    },
+    ( <span class="ident">acc</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">predicate_name</span>:<span class="ident">ident</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">ty</span>:<span class="ident">tt</span><span class="op">&gt;</span>( $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">argument</span>:<span class="ident">tt</span>),<span class="kw-2">*</span>), <span class="macro-nonterminal">$</span><span class="macro-nonterminal">perm</span>:<span class="ident">tt</span>) ) =&gt; {
+        {
+            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">arguments</span> <span class="op">=</span> <span class="macro">vec!</span>[ $( <span class="macro-nonterminal">$</span><span class="macro">crate::low::macros::expr!</span>( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">argument</span> ) ),<span class="op">*</span> ];
+            <span class="macro-nonterminal">$</span><span class="macro-nonterminal">crate::low::ast::expression::Expression::predicate_access_predicate_no_pos</span>(
+                <span class="macro">format!</span>(
+                    <span class="string">&quot;{}${}&quot;</span>,
+                    <span class="macro">stringify!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">predicate_name</span>),
+                    <span class="macro-nonterminal">$</span><span class="macro-nonterminal">crate::common::identifier::WithIdentifier::get_identifier</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">ty</span>)
+                ),
+                <span class="ident">arguments</span>,
+                <span class="macro-nonterminal">$</span><span class="macro">crate::low::macros::expr!</span>( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">perm</span> ),
             )
         }
     },
@@ -754,6 +816,22 @@
             <span class="ident">Vec::new</span>(),
         )
     },
+    (<span class="ident">fold</span> <span class="ident">acc</span>(
+        <span class="macro-nonterminal">$</span><span class="macro-nonterminal">predicate_name</span>:<span class="ident">ident</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">ty</span>:<span class="ident">tt</span><span class="op">&gt;</span>(
+            $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">argument</span>:<span class="ident">tt</span>),<span class="op">*</span>
+            $(; <span class="macro-nonterminal">$</span><span class="macro-nonterminal">argument_list</span>:<span class="ident">ident</span> )<span class="question-mark">?</span>
+        ),
+        <span class="macro-nonterminal">$</span><span class="macro-nonterminal">permission_amount</span>:<span class="ident">tt</span>
+    )) =&gt; {
+        <span class="macro-nonterminal">$</span><span class="macro-nonterminal">crate::low::ast::statement::Statement::fold_no_pos</span>(
+            <span class="macro-nonterminal">$</span><span class="macro">crate::low::macros::expr!</span>(
+                <span class="macro-nonterminal">acc</span>(
+                    <span class="macro-nonterminal">$</span><span class="macro-nonterminal">predicate_name</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">ty</span><span class="op">&gt;</span>( $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">argument</span>),<span class="op">*</span> $(; <span class="macro-nonterminal">$</span><span class="macro-nonterminal">argument_list</span> )<span class="question-mark">?</span> ),
+                    <span class="macro-nonterminal">$</span><span class="macro-nonterminal">permission_amount</span>
+                )
+            )
+        )
+    },
     (<span class="ident">fold</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">predicate_name</span>:<span class="ident">ident</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">ty</span>:<span class="ident">tt</span><span class="op">&gt;</span>(
         $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">argument</span>:<span class="ident">tt</span>),<span class="op">*</span>
         $(; <span class="macro-nonterminal">$</span><span class="macro-nonterminal">argument_list</span>:<span class="ident">ident</span> )<span class="question-mark">?</span>
@@ -772,6 +850,22 @@
                 <span class="macro-nonterminal">$</span><span class="macro">crate::low::macros::stmt!</span>{ <span class="macro-nonterminal">unfold</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">predicate_name</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">ty</span><span class="op">&gt;</span>( $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">argument</span>),<span class="op">*</span> $(; <span class="macro-nonterminal">$</span><span class="macro-nonterminal">argument_list</span> )<span class="question-mark">?</span> ) }
             ],
             <span class="ident">Vec::new</span>(),
+        )
+    },
+    (<span class="ident">unfold</span> <span class="ident">acc</span>(
+        <span class="macro-nonterminal">$</span><span class="macro-nonterminal">predicate_name</span>:<span class="ident">ident</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">ty</span>:<span class="ident">tt</span><span class="op">&gt;</span>(
+            $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">argument</span>:<span class="ident">tt</span>),<span class="op">*</span>
+            $(; <span class="macro-nonterminal">$</span><span class="macro-nonterminal">argument_list</span>:<span class="ident">ident</span> )<span class="question-mark">?</span>
+        ),
+        <span class="macro-nonterminal">$</span><span class="macro-nonterminal">permission_amount</span>:<span class="ident">tt</span>
+    )) =&gt; {
+        <span class="macro-nonterminal">$</span><span class="macro-nonterminal">crate::low::ast::statement::Statement::unfold_no_pos</span>(
+            <span class="macro-nonterminal">$</span><span class="macro">crate::low::macros::expr!</span>(
+                <span class="macro-nonterminal">acc</span>(
+                    <span class="macro-nonterminal">$</span><span class="macro-nonterminal">predicate_name</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">ty</span><span class="op">&gt;</span>( $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">argument</span>),<span class="op">*</span> $(; <span class="macro-nonterminal">$</span><span class="macro-nonterminal">argument_list</span> )<span class="question-mark">?</span> ),
+                    <span class="macro-nonterminal">$</span><span class="macro-nonterminal">permission_amount</span>
+                )
+            )
         )
     },
     (<span class="ident">unfold</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">predicate_name</span>:<span class="ident">ident</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">ty</span>:<span class="ident">tt</span><span class="op">&gt;</span>(
@@ -934,5 +1028,5 @@
     },
 }
 </code></pre></div>
-</section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="vir" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.62.0-nightly (e7575f967 2022-04-14)" ></div>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="vir" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0-nightly (42e1761c7 2022-05-15)" ></div>
 </body></html>

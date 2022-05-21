@@ -3,7 +3,9 @@
         </a><h2 class="location"></h2>
     </nav>
     <nav class="sidebar"><a class="sidebar-logo" href="../../../../../prusti_viper/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div>
-        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../prusti_viper/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><div class="theme-picker hidden"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="22" height="22" alt="Pick another theme!" src="../../../../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../prusti_viper/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><div id="settings-menu" tabindex="-1">
+                                <a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div>
+                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -31,7 +33,7 @@
 <span id="26">26</span>
 <span id="27">27</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::encoder</span>::{
-    <a class="ident" href="../../../../../src/prusti_viper/encoder/errors/spanned_encoding_error.rs.html#23">errors::SpannedEncodingResult</a>, <a class="ident" href="../../../../../src/prusti_viper/encoder/mir/procedures/interface.rs.html#14-21">mir::procedures::MirProcedureEncoderInterface</a>,
+    <a class="ident" href="../../../../../src/prusti_viper/encoder/errors/spanned_encoding_error.rs.html#23">errors::SpannedEncodingResult</a>, <a class="ident" href="../../../../../src/prusti_viper/encoder/mir/procedures/interface.rs.html#18-25">mir::procedures::MirProcedureEncoderInterface</a>,
 };
 <span class="kw">use</span> <span class="ident">log::debug</span>;
 <span class="kw">use</span> <a class="ident" href="https://doc.rust-lang.org/nightly/nightly-rustc/rustc_span/def_id/struct.DefId.html">rustc_hir::def_id::DefId</a>;
@@ -50,7 +52,7 @@
         <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
         <span class="ident">proc_def_id</span>: <a class="ident" href="https://doc.rust-lang.org/nightly/nightly-rustc/rustc_span/def_id/struct.DefId.html">DefId</a>,
     ) -&gt; <span class="ident">SpannedEncodingResult</span><span class="op">&lt;</span><a class="ident" href="../../../../../vir/gen/middle/cfg/procedure/struct.ProcedureDecl.html">vir_mid::ProcedureDecl</a><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">procedure_high</span> <span class="op">=</span> <a class="self" href="../../../../../src/prusti_viper/encoder/high/procedures/interface.rs.html#18">self</a>.<a class="ident" href="../../../../../src/prusti_viper/encoder/mir/procedures/interface.rs.html#15-18">encode_procedure_core_proof_high</a>(<a class="ident" href="../../../../../src/prusti_viper/encoder/high/procedures/interface.rs.html#19">proc_def_id</a>)<span class="question-mark">?</span>;
+        <span class="kw">let</span> <span class="ident">procedure_high</span> <span class="op">=</span> <a class="self" href="../../../../../src/prusti_viper/encoder/high/procedures/interface.rs.html#18">self</a>.<a class="ident" href="../../../../../src/prusti_viper/encoder/mir/procedures/interface.rs.html#19-22">encode_procedure_core_proof_high</a>(<a class="ident" href="../../../../../src/prusti_viper/encoder/high/procedures/interface.rs.html#19">proc_def_id</a>)<span class="question-mark">?</span>;
         <span class="macro">debug!</span>(<span class="string">&quot;procedure_high:\n{}&quot;</span>, <a class="ident" href="../../../../../src/prusti_viper/encoder/high/procedures/interface.rs.html#21">procedure_high</a>);
         <span class="kw">let</span> <span class="ident">procedure</span> <span class="op">=</span>
             <a class="ident" href="../../../../../src/prusti_viper/encoder/high/procedures/inference/mod.rs.html#18-22"><span class="kw">super</span>::inference::infer_shape_operations</a>(<a class="self" href="../../../../../src/prusti_viper/encoder/high/procedures/interface.rs.html#18">self</a>, <a class="ident" href="../../../../../src/prusti_viper/encoder/high/procedures/interface.rs.html#19">proc_def_id</a>, <a class="ident" href="../../../../../src/prusti_viper/encoder/high/procedures/interface.rs.html#21">procedure_high</a>)<span class="question-mark">?</span>;
@@ -58,5 +60,5 @@
     }
 }
 </code></pre></div>
-</section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="prusti_viper" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.62.0-nightly (e7575f967 2022-04-14)" ></div>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="prusti_viper" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0-nightly (42e1761c7 2022-05-15)" ></div>
 </body></html>

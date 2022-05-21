@@ -3,7 +3,9 @@
         </a><h2 class="location"></h2>
     </nav>
     <nav class="sidebar"><a class="sidebar-logo" href="../../../../../../prusti_viper/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../../rust-logo.svg" alt="logo"></div>
-        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../../prusti_viper/index.html"><img class="rust-logo" src="../../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><div class="theme-picker hidden"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="22" height="22" alt="Pick another theme!" src="../../../../../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../../wheel.svg"></a></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../../prusti_viper/index.html"><img class="rust-logo" src="../../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><div id="settings-menu" tabindex="-1">
+                                <a href="../../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../../wheel.svg"></a></div>
+                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -48,7 +50,7 @@
 <span id="43">43</span>
 <span id="44">44</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="self">self</span>::{<a class="ident" href="../../../../../../src/prusti_viper/encoder/high/procedures/inference/state.rs.html#21-38">state::FoldUnfoldState</a>, <a class="ident" href="../../../../../../src/prusti_viper/encoder/high/procedures/inference/visitor/mod.rs.html#28-42">visitor::Visitor</a>};
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::encoder</span>::{<a class="ident" href="../../../../../../src/prusti_viper/encoder/errors/spanned_encoding_error.rs.html#23">errors::SpannedEncodingResult</a>, <a class="ident" href="../../../../../../src/prusti_viper/encoder/encoder.rs.html#62-97">Encoder</a>};
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::encoder</span>::{<a class="ident" href="../../../../../../src/prusti_viper/encoder/errors/spanned_encoding_error.rs.html#23">errors::SpannedEncodingResult</a>, <a class="ident" href="../../../../../../src/prusti_viper/encoder/encoder.rs.html#63-99">Encoder</a>};
 <span class="kw">use</span> <a class="ident" href="../../../../../../prusti_common/config/index.html">prusti_common::config</a>;
 <span class="kw">use</span> <a class="ident" href="https://doc.rust-lang.org/nightly/nightly-rustc/rustc_span/def_id/struct.DefId.html">rustc_hir::def_id::DefId</a>;
 <span class="kw">use</span> <span class="ident">vir_crate</span>::{
@@ -60,9 +62,9 @@
 <span class="kw">mod</span> <a class="ident" href="../../../../../../src/prusti_viper/encoder/high/procedures/inference/action.rs.html#1-96">action</a>;
 <span class="kw">mod</span> <a class="ident" href="../../../../../../src/prusti_viper/encoder/high/procedures/inference/ensurer.rs.html#1-328">ensurer</a>;
 <span class="kw">mod</span> <a class="ident" href="../../../../../../src/prusti_viper/encoder/high/procedures/inference/permission.rs.html#1-21">permission</a>;
-<span class="kw">mod</span> <a class="ident" href="../../../../../../src/prusti_viper/encoder/high/procedures/inference/semantics.rs.html#1-583">semantics</a>;
+<span class="kw">mod</span> <a class="ident" href="../../../../../../src/prusti_viper/encoder/high/procedures/inference/semantics.rs.html#1-634">semantics</a>;
 <span class="kw">mod</span> <a class="ident" href="../../../../../../src/prusti_viper/encoder/high/procedures/inference/state.rs.html#1-510">state</a>;
-<span class="kw">mod</span> <a class="ident" href="../../../../../../src/prusti_viper/encoder/high/procedures/inference/visitor/mod.rs.html#1-344">visitor</a>;
+<span class="kw">mod</span> <a class="ident" href="../../../../../../src/prusti_viper/encoder/high/procedures/inference/visitor/mod.rs.html#1-345">visitor</a>;
 
 <span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">fn</span> <span class="ident">infer_shape_operations</span><span class="op">&lt;</span><span class="lifetime">&#39;v</span>, <span class="lifetime">&#39;tcx</span>: <span class="lifetime">&#39;v</span><span class="op">&gt;</span>(
     <span class="ident">encoder</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Encoder</span><span class="op">&lt;</span><span class="lifetime">&#39;v</span>, <span class="lifetime">&#39;tcx</span><span class="op">&gt;</span>,
@@ -70,7 +72,7 @@
     <span class="ident">procedure</span>: <a class="ident" href="../../../../../../vir/gen/high/cfg/procedure/struct.ProcedureDecl.html">vir_high::ProcedureDecl</a>,
 ) -&gt; <span class="ident">SpannedEncodingResult</span><span class="op">&lt;</span><a class="ident" href="../../../../../../vir/gen/middle/cfg/procedure/struct.ProcedureDecl.html">vir_mid::ProcedureDecl</a><span class="op">&gt;</span> {
     <span class="kw">if</span> <span class="ident">config::dump_debug_info</span>() {
-        <span class="kw">let</span> <span class="ident">source_filename</span> <span class="op">=</span> <a class="ident" href="../../../../../../src/prusti_viper/encoder/high/procedures/inference/mod.rs.html#19">encoder</a>.<a class="ident" href="../../../../../../src/prusti_viper/encoder/encoder.rs.html#203">env</a>().<span class="ident">source_file_name</span>();
+        <span class="kw">let</span> <span class="ident">source_filename</span> <span class="op">=</span> <a class="ident" href="../../../../../../src/prusti_viper/encoder/high/procedures/inference/mod.rs.html#19">encoder</a>.<a class="ident" href="../../../../../../src/prusti_viper/encoder/encoder.rs.html#206">env</a>().<span class="ident">source_file_name</span>();
         <span class="ident">prusti_common::report::log::report_with_writer</span>(
             <span class="string">&quot;graphviz_method_before_foldunfold&quot;</span>,
             <span class="macro">format!</span>(<span class="string">&quot;{}.{}.dot&quot;</span>, <a class="ident" href="../../../../../../src/prusti_viper/encoder/high/procedures/inference/mod.rs.html#24">source_filename</a>, <a class="ident" href="../../../../../../src/prusti_viper/encoder/high/procedures/inference/mod.rs.html#21">procedure</a>.<span class="ident">name</span>),
@@ -80,9 +82,9 @@
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">visitor</span> <span class="op">=</span> <span class="ident">Visitor::new</span>(<a class="ident" href="../../../../../../src/prusti_viper/encoder/high/procedures/inference/mod.rs.html#19">encoder</a>, <a class="ident" href="../../../../../../src/prusti_viper/encoder/high/procedures/inference/mod.rs.html#20">proc_def_id</a>);
     <span class="kw">let</span> <span class="ident">initial_state</span> <span class="op">=</span> <span class="ident">FoldUnfoldState::new</span>();
     <span class="kw">let</span> <span class="ident">shaped_procedure</span> <span class="op">=</span> <a class="ident" href="../../../../../../src/prusti_viper/encoder/high/procedures/inference/mod.rs.html#31">visitor</a>.<a class="ident" href="../../../../../../src/prusti_viper/encoder/high/procedures/inference/visitor/mod.rs.html#61-65">infer_procedure</a>(<a class="ident" href="../../../../../../src/prusti_viper/encoder/high/procedures/inference/mod.rs.html#21">procedure</a>, <a class="ident" href="../../../../../../src/prusti_viper/encoder/high/procedures/inference/mod.rs.html#32">initial_state</a>)<span class="question-mark">?</span>;
-    <a class="ident" href="../../../../../../src/prusti_viper/encoder/high/procedures/inference/mod.rs.html#31">visitor</a>.<a class="ident" href="../../../../../../src/prusti_viper/encoder/high/procedures/inference/visitor/mod.rs.html#341">cancel_crash_graphviz</a>();
+    <a class="ident" href="../../../../../../src/prusti_viper/encoder/high/procedures/inference/mod.rs.html#31">visitor</a>.<a class="ident" href="../../../../../../src/prusti_viper/encoder/high/procedures/inference/visitor/mod.rs.html#342">cancel_crash_graphviz</a>();
     <span class="kw">if</span> <span class="ident">config::dump_debug_info</span>() {
-        <span class="kw">let</span> <span class="ident">source_filename</span> <span class="op">=</span> <a class="ident" href="../../../../../../src/prusti_viper/encoder/high/procedures/inference/mod.rs.html#19">encoder</a>.<a class="ident" href="../../../../../../src/prusti_viper/encoder/encoder.rs.html#203">env</a>().<span class="ident">source_file_name</span>();
+        <span class="kw">let</span> <span class="ident">source_filename</span> <span class="op">=</span> <a class="ident" href="../../../../../../src/prusti_viper/encoder/high/procedures/inference/mod.rs.html#19">encoder</a>.<a class="ident" href="../../../../../../src/prusti_viper/encoder/encoder.rs.html#206">env</a>().<span class="ident">source_file_name</span>();
         <span class="ident">prusti_common::report::log::report_with_writer</span>(
             <span class="string">&quot;graphviz_method_after_foldunfold&quot;</span>,
             <span class="macro">format!</span>(<span class="string">&quot;{}.{}.dot&quot;</span>, <a class="ident" href="../../../../../../src/prusti_viper/encoder/high/procedures/inference/mod.rs.html#36">source_filename</a>, <a class="ident" href="../../../../../../src/prusti_viper/encoder/high/procedures/inference/mod.rs.html#33">shaped_procedure</a>.<span class="ident">name</span>),
@@ -92,5 +94,5 @@
     <span class="prelude-val">Ok</span>(<a class="ident" href="../../../../../../src/prusti_viper/encoder/high/procedures/inference/mod.rs.html#33">shaped_procedure</a>)
 }
 </code></pre></div>
-</section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../../../../" data-current-crate="prusti_viper" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.62.0-nightly (e7575f967 2022-04-14)" ></div>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../../" data-current-crate="prusti_viper" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0-nightly (42e1761c7 2022-05-15)" ></div>
 </body></html>

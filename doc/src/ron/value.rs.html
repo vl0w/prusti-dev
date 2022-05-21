@@ -3,7 +3,9 @@
         </a><h2 class="location"></h2>
     </nav>
     <nav class="sidebar"><a class="sidebar-logo" href="../../ron/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
-        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../ron/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><div class="theme-picker hidden"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="22" height="22" alt="Pick another theme!" src="../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../ron/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><div id="settings-menu" tabindex="-1">
+                                <a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div>
+                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -637,7 +639,7 @@
 }
 
 <span class="kw">impl</span> <span class="ident">FromIterator</span><span class="op">&lt;</span>(<a class="ident" href="../../src/ron/value.rs.html#318-327">Value</a>, <a class="ident" href="../../src/ron/value.rs.html#318-327">Value</a>)<span class="op">&gt;</span> <span class="kw">for</span> <a class="ident" href="../../src/ron/value.rs.html#26">Map</a> {
-    <span class="kw">fn</span> <span class="ident">from_iter</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">IntoIterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> (<span class="ident">Value</span>, <span class="ident">Value</span>)<span class="op">&gt;</span><span class="op">&gt;</span>(<span class="ident">iter</span>: <span class="ident">T</span>) -&gt; <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">from_iter</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">IntoIterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> (<a class="ident" href="../../src/ron/value.rs.html#318-327">Value</a>, <a class="ident" href="../../src/ron/value.rs.html#318-327">Value</a>)<span class="op">&gt;</span><span class="op">&gt;</span>(<span class="ident">iter</span>: <span class="ident">T</span>) -&gt; <span class="self">Self</span> {
         <a class="ident" href="../../src/ron/value.rs.html#26">Map</a>(<span class="ident">MapInner::from_iter</span>(<a class="ident" href="../../src/ron/value.rs.html#82">iter</a>))
     }
 }
@@ -715,7 +717,7 @@
 
 <span class="kw">impl</span> <a class="ident" href="../../src/ron/value.rs.html#136-139">Number</a> {
     <span class="doccomment">/// Construct a new number.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">v</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Number</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">v</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><a class="ident" href="../../src/ron/value.rs.html#136-139">Number</a><span class="op">&gt;</span>) -&gt; <span class="self">Self</span> {
         <a class="ident" href="../../src/ron/value.rs.html#160">v</a>.<a class="ident" href="https://doc.rust-lang.org/nightly/core/convert/trait.Into.html">into</a>()
     }
 
@@ -778,8 +780,8 @@
     <span class="doccomment">/// ```</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">map_to</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(
         <span class="self">self</span>,
-        <span class="ident">integer_fn</span>: <span class="kw">impl</span> <span class="ident">FnOnce</span>(<span class="ident">i64</span>) -&gt; <span class="ident">T</span>,
-        <span class="ident">float_fn</span>: <span class="kw">impl</span> <span class="ident">FnOnce</span>(<span class="ident">f64</span>) -&gt; <span class="ident">T</span>,
+        <span class="ident">integer_fn</span>: <span class="kw">impl</span> <span class="ident">FnOnce</span>(<a class="ident" href="https://doc.rust-lang.org/nightly/std/primitive.i64.html">i64</a>) -&gt; <span class="ident">T</span>,
+        <span class="ident">float_fn</span>: <span class="kw">impl</span> <span class="ident">FnOnce</span>(<a class="ident" href="https://doc.rust-lang.org/nightly/std/primitive.f64.html">f64</a>) -&gt; <span class="ident">T</span>,
     ) -&gt; <span class="ident">T</span> {
         <span class="kw">match</span> <a class="self" href="../../src/ron/value.rs.html#222">self</a> {
             <a class="ident" href="../../src/ron/value.rs.html#137">Number::Integer</a>(<span class="ident">i</span>) =&gt; <a class="ident" href="../../src/ron/value.rs.html#223">integer_fn</a>(<a class="ident" href="../../src/ron/value.rs.html#227">i</a>),
@@ -1110,5 +1112,5 @@
     }
 }
 </code></pre></div>
-</section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="ron" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.62.0-nightly (e7575f967 2022-04-14)" ></div>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="ron" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0-nightly (42e1761c7 2022-05-15)" ></div>
 </body></html>

@@ -3,7 +3,9 @@
         </a><h2 class="location"></h2>
     </nav>
     <nav class="sidebar"><a class="sidebar-logo" href="../../../prusti_specs/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
-        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../prusti_specs/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><div class="theme-picker hidden"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="22" height="22" alt="Pick another theme!" src="../../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../prusti_specs/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><div id="settings-menu" tabindex="-1">
+                                <a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div>
+                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -121,7 +123,7 @@
 <span id="116">116</span>
 <span id="117">117</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="kw">crate</span>::{
-    <a class="ident" href="../../../src/prusti_specs/lib.rs.html#182">generate_for_ensures</a>, <a class="ident" href="../../../src/prusti_specs/lib.rs.html#163">generate_for_requires</a>, <a class="ident" href="../../../src/prusti_specs/specifications/preparser.rs.html#53">parse_ghost_constraint</a>, <a class="ident" href="../../../src/prusti_specs/specifications/mod.rs.html#19">untyped</a>, <a class="ident" href="../../../src/prusti_specs/lib.rs.html#130">GeneratedResult</a>,
+    <a class="ident" href="../../../src/prusti_specs/lib.rs.html#184">generate_for_ensures</a>, <a class="ident" href="../../../src/prusti_specs/lib.rs.html#165">generate_for_requires</a>, <a class="ident" href="../../../src/prusti_specs/specifications/preparser.rs.html#53">parse_ghost_constraint</a>, <a class="ident" href="../../../src/prusti_specs/specifications/mod.rs.html#19">untyped</a>, <a class="ident" href="../../../src/prusti_specs/lib.rs.html#131">GeneratedResult</a>,
     <a class="ident" href="../../../src/prusti_specs/specifications/preparser.rs.html#513-516">NestedSpec</a>,
 };
 <span class="kw">use</span> <a class="ident" href="../../../proc_macro2/struct.TokenStream.html">proc_macro2::TokenStream</a>;
@@ -129,7 +131,7 @@
 <span class="kw">use</span> <span class="ident">syn</span>::{<a class="ident" href="../../../syn/parse/type.ParseStream.html">parse::ParseStream</a>, <span class="ident">parse_quote_spanned</span>, <a class="ident" href="../../../syn/spanned/trait.Spanned.html">spanned::Spanned</a>};
 <span class="kw">use</span> <a class="ident" href="../../../syn/punctuated/struct.Punctuated.html">syn::punctuated::Punctuated</a>;
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">generate</span>(<span class="ident">attr</span>: <a class="ident" href="../../../proc_macro2/struct.TokenStream.html">TokenStream</a>, <span class="ident">item</span>: <span class="kw-2">&amp;</span><a class="ident" href="../../../src/prusti_specs/specifications/untyped.rs.html#11-15">untyped::AnyFnItem</a>) -&gt; <a class="ident" href="../../../src/prusti_specs/lib.rs.html#130">GeneratedResult</a> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">generate</span>(<span class="ident">attr</span>: <a class="ident" href="../../../proc_macro2/struct.TokenStream.html">TokenStream</a>, <span class="ident">item</span>: <span class="kw-2">&amp;</span><a class="ident" href="../../../src/prusti_specs/specifications/untyped.rs.html#11-15">untyped::AnyFnItem</a>) -&gt; <a class="ident" href="../../../src/prusti_specs/lib.rs.html#131">GeneratedResult</a> {
     <span class="kw">let</span> <span class="ident">tokens_span</span> <span class="op">=</span> <a class="ident" href="../../../src/prusti_specs/ghost_constraints/mod.rs.html#10">attr</a>.<a class="ident" href="../../../syn/spanned/trait.Spanned.html">span</a>();
 
     <span class="comment">// Parse ghost constraint information</span>
@@ -145,8 +147,8 @@
 
     <span class="kw">for</span> <span class="ident">nested_spec</span> <span class="kw">in</span> <a class="ident" href="../../../src/prusti_specs/ghost_constraints/mod.rs.html#14">nested_specs</a> {
         <span class="kw">let</span> (<span class="kw-2">mut</span> <span class="ident">generated_items</span>, <span class="ident">generated_attrs</span>) <span class="op">=</span> <span class="kw">match</span> <a class="ident" href="../../../src/prusti_specs/ghost_constraints/mod.rs.html#24">nested_spec</a> {
-            <a class="ident" href="../../../src/prusti_specs/specifications/preparser.rs.html#515">NestedSpec::Ensures</a>(<span class="ident">tokens</span>) =&gt; <a class="ident" href="../../../src/prusti_specs/lib.rs.html#182">generate_for_ensures</a>(<a class="ident" href="../../../src/prusti_specs/ghost_constraints/mod.rs.html#26">tokens</a>, <a class="ident" href="../../../src/prusti_specs/ghost_constraints/mod.rs.html#10">item</a>)<span class="question-mark">?</span>,
-            <a class="ident" href="../../../src/prusti_specs/specifications/preparser.rs.html#514">NestedSpec::Requires</a>(<span class="ident">tokens</span>) =&gt; <a class="ident" href="../../../src/prusti_specs/lib.rs.html#163">generate_for_requires</a>(<a class="ident" href="../../../src/prusti_specs/ghost_constraints/mod.rs.html#27">tokens</a>, <a class="ident" href="../../../src/prusti_specs/ghost_constraints/mod.rs.html#10">item</a>)<span class="question-mark">?</span>,
+            <a class="ident" href="../../../src/prusti_specs/specifications/preparser.rs.html#515">NestedSpec::Ensures</a>(<span class="ident">tokens</span>) =&gt; <a class="ident" href="../../../src/prusti_specs/lib.rs.html#184">generate_for_ensures</a>(<a class="ident" href="../../../src/prusti_specs/ghost_constraints/mod.rs.html#26">tokens</a>, <a class="ident" href="../../../src/prusti_specs/ghost_constraints/mod.rs.html#10">item</a>)<span class="question-mark">?</span>,
+            <a class="ident" href="../../../src/prusti_specs/specifications/preparser.rs.html#514">NestedSpec::Requires</a>(<span class="ident">tokens</span>) =&gt; <a class="ident" href="../../../src/prusti_specs/lib.rs.html#165">generate_for_requires</a>(<a class="ident" href="../../../src/prusti_specs/ghost_constraints/mod.rs.html#27">tokens</a>, <a class="ident" href="../../../src/prusti_specs/ghost_constraints/mod.rs.html#10">item</a>)<span class="question-mark">?</span>,
         };
 
         <span class="kw">for</span> <span class="ident">generated_item</span> <span class="kw">in</span> <a class="ident" href="../../../src/prusti_specs/ghost_constraints/mod.rs.html#25">generated_items</a>.<span class="ident">iter_mut</span>() {
@@ -238,5 +240,5 @@
     }
 }
 </code></pre></div>
-</section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="prusti_specs" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.62.0-nightly (e7575f967 2022-04-14)" ></div>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="prusti_specs" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0-nightly (42e1761c7 2022-05-15)" ></div>
 </body></html>

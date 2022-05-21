@@ -3,7 +3,9 @@
         </a><h2 class="location"></h2>
     </nav>
     <nav class="sidebar"><a class="sidebar-logo" href="../../../../../prusti_viper/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div>
-        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../prusti_viper/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><div class="theme-picker hidden"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="22" height="22" alt="Pick another theme!" src="../../../../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../prusti_viper/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><div id="settings-menu" tabindex="-1">
+                                <a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div>
+                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -249,7 +251,7 @@
     <span class="ident">builtin_encoder</span>::{<a class="ident" href="../../../../../src/prusti_viper/encoder/builtin_encoder.rs.html#59-61">BuiltinEncoder</a>, <a class="ident" href="../../../../../src/prusti_viper/encoder/builtin_encoder.rs.html#26-49">BuiltinFunctionKind</a>},
     <a class="ident" href="../../../../../src/prusti_viper/encoder/errors/spanned_encoding_error.rs.html#23">errors::SpannedEncodingResult</a>,
     <a class="ident" href="../../../../../src/prusti_viper/encoder/high/builtin_functions/encoder.rs.html#7">high::builtin_functions::encoder::encode_builtin_function_def</a>,
-    <a class="ident" href="../../../../../src/prusti_viper/encoder/mir/pure/pure_functions/interface.rs.html#84-150">mir::pure::PureFunctionEncoderInterface</a>,
+    <a class="ident" href="../../../../../src/prusti_viper/encoder/mir/pure/pure_functions/interface.rs.html#85-151">mir::pure::PureFunctionEncoderInterface</a>,
 };
 <span class="kw">use</span> <span class="ident">log::trace</span>;
 
@@ -301,7 +303,7 @@
 <span class="kw">impl</span> <span class="ident">IntoPolymorphic</span><span class="op">&lt;</span><a class="ident" href="../../../../../src/prusti_viper/encoder/builtin_encoder.rs.html#26-49">BuiltinFunctionKind</a><span class="op">&gt;</span> <span class="kw">for</span> <a class="ident" href="../../../../../src/prusti_viper/encoder/high/builtin_functions/interface.rs.html#28-53">BuiltinFunctionHighKind</a> {
     <span class="kw">fn</span> <span class="ident">lower</span>(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-        <span class="ident">encoder</span>: <span class="kw-2">&amp;</span><span class="kw">impl</span> <a class="ident" href="../../../../../src/prusti_viper/encoder/high/types/interface.rs.html#43-52"><span class="kw">crate</span>::encoder::high::types::interface::HighTypeEncoderInterfacePrivate</a>,
+        <span class="ident">encoder</span>: <span class="kw-2">&amp;</span><span class="kw">impl</span> <a class="ident" href="../../../../../src/prusti_viper/encoder/high/types/interface.rs.html#40-49"><span class="kw">crate</span>::encoder::high::types::interface::HighTypeEncoderInterfacePrivate</a>,
     ) -&gt; <a class="ident" href="../../../../../src/prusti_viper/encoder/builtin_encoder.rs.html#26-49">BuiltinFunctionKind</a> {
         <span class="kw">match</span> <a class="self" href="../../../../../src/prusti_viper/encoder/high/builtin_functions/interface.rs.html#57">self</a> {
             <a class="ident" href="../../../../../src/prusti_viper/encoder/high/builtin_functions/interface.rs.html#30">BuiltinFunctionHighKind::Unreachable</a>(<span class="ident">ty</span>) =&gt; {
@@ -368,7 +370,7 @@
             .<span class="ident">contains</span>(<span class="kw-2">&amp;</span><a class="ident" href="../../../../../src/prusti_viper/encoder/high/builtin_functions/interface.rs.html#115">function_kind</a>)
         {
             <span class="kw">let</span> <span class="ident">function</span> <span class="op">=</span> <a class="ident" href="../../../../../src/prusti_viper/encoder/high/builtin_functions/encoder.rs.html#7">encode_builtin_function_def</a>(<a class="ident" href="../../../../../src/prusti_viper/encoder/high/builtin_functions/interface.rs.html#115">function_kind</a>.<a class="ident" href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html">clone</a>());
-            <a class="self" href="../../../../../src/prusti_viper/encoder/high/builtin_functions/interface.rs.html#114">self</a>.<a class="ident" href="../../../../../src/prusti_viper/encoder/mir/pure/pure_functions/interface.rs.html#145-149">register_function_constructor_mir</a>(
+            <a class="self" href="../../../../../src/prusti_viper/encoder/high/builtin_functions/interface.rs.html#114">self</a>.<a class="ident" href="../../../../../src/prusti_viper/encoder/mir/pure/pure_functions/interface.rs.html#146-150">register_function_constructor_mir</a>(
                 <a class="ident" href="../../../../../src/prusti_viper/encoder/high/builtin_functions/interface.rs.html#124">function</a>.<a class="ident" href="../../../../../vir/common/identifier/trait.WithIdentifier.html">get_identifier</a>(),
                 <span class="ident">Box::new</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="prelude-val">Ok</span>(<a class="ident" href="../../../../../src/prusti_viper/encoder/high/builtin_functions/interface.rs.html#124">function</a>)),
             )<span class="question-mark">?</span>;
@@ -398,7 +400,7 @@
             <a class="self" href="../../../../../src/prusti_viper/encoder/high/builtin_functions/interface.rs.html#142">self</a>.<span class="ident">high_builtin_function_encoder_state</span>
                 .<span class="ident">builtin_functions</span>
                 .<span class="ident">borrow_mut</span>()
-                .<span class="ident">insert</span>(<a class="ident" href="../../../../../src/prusti_viper/encoder/high/builtin_functions/interface.rs.html#142">function_kind</a>, <a class="self" href="../../../../../src/prusti_viper/encoder/high/builtin_functions/interface.rs.html#142">self</a>.<a class="ident" href="../../../../../src/prusti_viper/encoder/encoder.rs.html#241">insert_function</a>(<a class="ident" href="../../../../../src/prusti_viper/encoder/high/builtin_functions/interface.rs.html#151">function</a>));
+                .<span class="ident">insert</span>(<a class="ident" href="../../../../../src/prusti_viper/encoder/high/builtin_functions/interface.rs.html#142">function_kind</a>, <a class="self" href="../../../../../src/prusti_viper/encoder/high/builtin_functions/interface.rs.html#142">self</a>.<a class="ident" href="../../../../../src/prusti_viper/encoder/encoder.rs.html#244">insert_function</a>(<a class="ident" href="../../../../../src/prusti_viper/encoder/high/builtin_functions/interface.rs.html#151">function</a>));
         }
     }
 }
@@ -486,5 +488,5 @@
     }
 }
 </code></pre></div>
-</section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="prusti_viper" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.62.0-nightly (e7575f967 2022-04-14)" ></div>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="prusti_viper" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0-nightly (42e1761c7 2022-05-15)" ></div>
 </body></html>
