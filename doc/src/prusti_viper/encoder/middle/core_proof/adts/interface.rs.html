@@ -1,9 +1,8 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `prusti-viper/src/encoder/middle/core_proof/adts/interface.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>interface.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../../storage.js"></script><script src="../../../../../../crates.js"></script><script defer src="../../../../../../main.js"></script><script defer src="../../../../../../source-script.js"></script><script defer src="../../../../../../source-files.js"></script>
-    <noscript><link rel="stylesheet" href="../../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../../prusti_viper/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../../rust-logo.svg" alt="logo"></div>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `prusti-viper/src/encoder/middle/core_proof/adts/interface.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>interface.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../../storage.js"></script><script defer src="../../../../../../source-script.js"></script><script defer src="../../../../../../source-files.js"></script><script defer src="../../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../../prusti_viper/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../../rust-logo.svg" alt="logo"></div>
         </a><h2 class="location"></h2>
     </nav>
     <nav class="sidebar"><a class="sidebar-logo" href="../../../../../../prusti_viper/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../../rust-logo.svg" alt="logo"></div>
-        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../../prusti_viper/index.html"><img class="rust-logo" src="../../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><div id="settings-menu" tabindex="-1">
+        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../../prusti_viper/index.html"><img class="rust-logo" src="../../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1">
                                 <a href="../../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../../wheel.svg"></a></div>
                         </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
@@ -347,9 +346,34 @@
 <span id="340">340</span>
 <span id="341">341</span>
 <span id="342">342</span>
+<span id="343">343</span>
+<span id="344">344</span>
+<span id="345">345</span>
+<span id="346">346</span>
+<span id="347">347</span>
+<span id="348">348</span>
+<span id="349">349</span>
+<span id="350">350</span>
+<span id="351">351</span>
+<span id="352">352</span>
+<span id="353">353</span>
+<span id="354">354</span>
+<span id="355">355</span>
+<span id="356">356</span>
+<span id="357">357</span>
+<span id="358">358</span>
+<span id="359">359</span>
+<span id="360">360</span>
+<span id="361">361</span>
+<span id="362">362</span>
+<span id="363">363</span>
+<span id="364">364</span>
+<span id="365">365</span>
+<span id="366">366</span>
+<span id="367">367</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::encoder</span>::{
     <a class="ident" href="../../../../../../src/prusti_viper/encoder/errors/spanned_encoding_error.rs.html#23">errors::SpannedEncodingResult</a>,
-    <span class="ident">middle::core_proof::lowerer</span>::{<a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/lowerer/domains/interface.rs.html#43-87">DomainsLowererInterface</a>, <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/lowerer/mod.rs.html#62-77">Lowerer</a>},
+    <span class="ident">middle::core_proof::lowerer</span>::{<a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/lowerer/domains/interface.rs.html#79-140">DomainsLowererInterface</a>, <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/lowerer/mod.rs.html#63-79">Lowerer</a>},
 };
 <span class="kw">use</span> <a class="ident" href="../../../../../../rustc_hash/type.FxHashSet.html">rustc_hash::FxHashSet</a>;
 <span class="kw">use</span> <a class="ident" href="https://doc.rust-lang.org/nightly/alloc/borrow/enum.Cow.html">std::borrow::Cow</a>;
@@ -448,7 +472,7 @@
         <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
         <span class="ident">domain_name</span>: <span class="kw-2">&amp;</span><a class="ident" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>,
         <span class="ident">parameters</span>: <span class="ident">Vec</span><span class="op">&lt;</span><a class="ident" href="../../../../../../vir/gen/low/ast/variable/struct.VariableDecl.html">vir_low::VariableDecl</a><span class="op">&gt;</span>,
-        <span class="ident">generate_top_down_injectivity_axiom</span>: <a class="ident" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a>,
+        <span class="ident">generate_injectivity_axioms</span>: <a class="ident" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a>,
         <span class="ident">top_down_injectivity_guard</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>,
     ) -&gt; <span class="ident">SpannedEncodingResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span>
     <span class="kw">where</span>
@@ -463,12 +487,18 @@
     <span class="doccomment">/// and its result is used to guard the injectivity property. This is</span>
     <span class="doccomment">/// intended to be used by the snapshot encoder to supply call to the</span>
     <span class="doccomment">/// validity function.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// If `use_main_constructor_destructors` is true, do not generate</span>
+    <span class="doccomment">/// destructors and for injectivity axioms use destructors with</span>
+    <span class="doccomment">/// `variant_name==&quot;&quot;`. This assumes that this variant&#39;s parameters are a</span>
+    <span class="doccomment">/// subset of the main constructor&#39;s parameters.</span>
     <span class="kw">fn</span> <span class="ident">adt_register_variant_constructor</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>(
         <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
         <span class="ident">domain_name</span>: <span class="kw-2">&amp;</span><a class="ident" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>,
         <span class="ident">variant_name</span>: <span class="kw-2">&amp;</span><a class="ident" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>,
+        <span class="ident">use_main_constructor_destructors</span>: <a class="ident" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a>,
         <span class="ident">parameters</span>: <span class="ident">Vec</span><span class="op">&lt;</span><a class="ident" href="../../../../../../vir/gen/low/ast/variable/struct.VariableDecl.html">vir_low::VariableDecl</a><span class="op">&gt;</span>,
-        <span class="ident">generate_top_down_injectivity_axiom</span>: <a class="ident" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a>,
+        <span class="ident">generate_injectivity_axioms</span>: <a class="ident" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a>,
         <span class="ident">top_down_injectivity_guard</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>,
     ) -&gt; <span class="ident">SpannedEncodingResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span>
     <span class="kw">where</span>
@@ -479,13 +509,13 @@
             -&gt; <span class="ident">SpannedEncodingResult</span><span class="op">&lt;</span>(<a class="ident" href="../../../../../../vir/gen/low/ast/expression/enum.Expression.html">vir_low::Expression</a>, <a class="ident" href="../../../../../../vir/gen/low/ast/expression/enum.Expression.html">vir_low::Expression</a>)<span class="op">&gt;</span>;
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;p</span>, <span class="lifetime">&#39;v</span>: <span class="lifetime">&#39;p</span>, <span class="lifetime">&#39;tcx</span>: <span class="lifetime">&#39;v</span><span class="op">&gt;</span> <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#27-131">AdtsInterface</a> <span class="kw">for</span> <span class="ident">Lowerer</span><span class="op">&lt;</span><span class="lifetime">&#39;p</span>, <span class="lifetime">&#39;v</span>, <span class="lifetime">&#39;tcx</span><span class="op">&gt;</span> {
+<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;p</span>, <span class="lifetime">&#39;v</span>: <span class="lifetime">&#39;p</span>, <span class="lifetime">&#39;tcx</span>: <span class="lifetime">&#39;v</span><span class="op">&gt;</span> <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#27-137">AdtsInterface</a> <span class="kw">for</span> <span class="ident">Lowerer</span><span class="op">&lt;</span><span class="lifetime">&#39;p</span>, <span class="lifetime">&#39;v</span>, <span class="lifetime">&#39;tcx</span><span class="op">&gt;</span> {
     <span class="kw">fn</span> <span class="ident">adt_constructor_variant_name</span>(
         <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
         <span class="ident">domain_name</span>: <span class="kw-2">&amp;</span><a class="ident" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>,
         <span class="ident">variant_name</span>: <span class="kw-2">&amp;</span><a class="ident" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>,
     ) -&gt; <span class="ident">SpannedEncodingResult</span><span class="op">&lt;</span><a class="ident" href="https://doc.rust-lang.org/nightly/alloc/string/struct.String.html">String</a><span class="op">&gt;</span> {
-        <span class="prelude-val">Ok</span>(<span class="macro">format!</span>(<span class="string">&quot;constructor${}${}&quot;</span>, <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#136">domain_name</a>, <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#137">variant_name</a>))
+        <span class="prelude-val">Ok</span>(<a class="macro" href="https://doc.rust-lang.org/nightly/alloc/macro.format.html">format!</a>(<span class="string">&quot;constructor${}${}&quot;</span>, <span class="ident">domain_name</span>, <span class="ident">variant_name</span>))
     }
     <span class="kw">fn</span> <span class="ident">adt_destructor_variant_name</span>(
         <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
@@ -493,9 +523,9 @@
         <span class="ident">variant_name</span>: <span class="kw-2">&amp;</span><a class="ident" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>,
         <span class="ident">parameter_name</span>: <span class="kw-2">&amp;</span><a class="ident" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>,
     ) -&gt; <span class="ident">SpannedEncodingResult</span><span class="op">&lt;</span><a class="ident" href="https://doc.rust-lang.org/nightly/alloc/string/struct.String.html">String</a><span class="op">&gt;</span> {
-        <span class="prelude-val">Ok</span>(<span class="macro">format!</span>(
+        <span class="prelude-val">Ok</span>(<a class="macro" href="https://doc.rust-lang.org/nightly/alloc/macro.format.html">format!</a>(
             <span class="string">&quot;destructor${}${}${}&quot;</span>,
-            <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#143">domain_name</a>, <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#144">variant_name</a>, <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#145">parameter_name</a>
+            <span class="ident">domain_name</span>, <span class="ident">variant_name</span>, <span class="ident">parameter_name</span>
         ))
     }
     <span class="kw">fn</span> <span class="ident">adt_constructor_variant_call</span>(
@@ -505,10 +535,10 @@
         <span class="ident">arguments</span>: <span class="ident">Vec</span><span class="op">&lt;</span><a class="ident" href="../../../../../../vir/gen/low/ast/expression/enum.Expression.html">vir_low::Expression</a><span class="op">&gt;</span>,
     ) -&gt; <span class="ident">SpannedEncodingResult</span><span class="op">&lt;</span><a class="ident" href="../../../../../../vir/gen/low/ast/expression/enum.Expression.html">vir_low::Expression</a><span class="op">&gt;</span> {
         <span class="prelude-val">Ok</span>(<span class="ident">vir_low::Expression::domain_function_call</span>(
-            <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#154">domain_name</a>.<a class="ident" href="https://doc.rust-lang.org/nightly/alloc/string/trait.ToString.html">to_string</a>(),
-            <a class="self" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#153">self</a>.<a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#33-37">adt_constructor_variant_name</a>(<a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#154">domain_name</a>, <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#155">variant_name</a>)<span class="question-mark">?</span>,
-            <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#156">arguments</a>,
-            <span class="ident">vir_low::Type::domain</span>(<a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#154">domain_name</a>.<a class="ident" href="https://doc.rust-lang.org/nightly/alloc/string/trait.ToString.html">to_string</a>()),
+            <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#160">domain_name</a>.<a class="ident" href="https://doc.rust-lang.org/nightly/alloc/string/trait.ToString.html">to_string</a>(),
+            <span class="self">self</span>.<span class="ident">adt_constructor_variant_name</span>(<span class="ident">domain_name</span>, <span class="ident">variant_name</span>)<span class="question-mark">?</span>,
+            <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#162">arguments</a>,
+            <span class="ident">vir_low::Type::domain</span>(<a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#160">domain_name</a>.<a class="ident" href="https://doc.rust-lang.org/nightly/alloc/string/trait.ToString.html">to_string</a>()),
         ))
     }
     <span class="kw">fn</span> <span class="ident">adt_destructor_variant_call</span>(
@@ -520,17 +550,17 @@
         <span class="ident">argument</span>: <a class="ident" href="../../../../../../vir/gen/low/ast/expression/enum.Expression.html">vir_low::Expression</a>,
     ) -&gt; <span class="ident">SpannedEncodingResult</span><span class="op">&lt;</span><a class="ident" href="../../../../../../vir/gen/low/ast/expression/enum.Expression.html">vir_low::Expression</a><span class="op">&gt;</span> {
         <span class="prelude-val">Ok</span>(<span class="ident">vir_low::Expression::domain_function_call</span>(
-            <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#167">domain_name</a>.<a class="ident" href="https://doc.rust-lang.org/nightly/alloc/string/trait.ToString.html">to_string</a>(),
-            <a class="self" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#166">self</a>.<a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#45-50">adt_destructor_variant_name</a>(<a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#167">domain_name</a>, <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#168">variant_name</a>, <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#169">parameter_name</a>)<span class="question-mark">?</span>,
-            <span class="macro">vec!</span>[<a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#171">argument</a>],
-            <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#170">parameter_type</a>,
+            <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#173">domain_name</a>.<a class="ident" href="https://doc.rust-lang.org/nightly/alloc/string/trait.ToString.html">to_string</a>(),
+            <span class="self">self</span>.<span class="ident">adt_destructor_variant_name</span>(<span class="ident">domain_name</span>, <span class="ident">variant_name</span>, <span class="ident">parameter_name</span>)<span class="question-mark">?</span>,
+            <a class="macro" href="https://doc.rust-lang.org/nightly/alloc/macro.vec.html">vec!</a>[<span class="ident">argument</span>],
+            <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#176">parameter_type</a>,
         ))
     }
     <span class="kw">fn</span> <span class="ident">adt_register_main_constructor</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>(
         <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
         <span class="ident">domain_name</span>: <span class="kw-2">&amp;</span><a class="ident" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>,
         <span class="ident">parameters</span>: <span class="ident">Vec</span><span class="op">&lt;</span><a class="ident" href="../../../../../../vir/gen/low/ast/variable/struct.VariableDecl.html">vir_low::VariableDecl</a><span class="op">&gt;</span>,
-        <span class="ident">generate_top_down_injectivity_axiom</span>: <a class="ident" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a>,
+        <span class="ident">generate_injectivity_axioms</span>: <a class="ident" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a>,
         <span class="ident">top_down_injectivity_guard</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>,
     ) -&gt; <span class="ident">SpannedEncodingResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span>
     <span class="kw">where</span>
@@ -540,24 +570,26 @@
         )
             -&gt; <span class="ident">SpannedEncodingResult</span><span class="op">&lt;</span>(<a class="ident" href="../../../../../../vir/gen/low/ast/expression/enum.Expression.html">vir_low::Expression</a>, <a class="ident" href="../../../../../../vir/gen/low/ast/expression/enum.Expression.html">vir_low::Expression</a>)<span class="op">&gt;</span>,
     {
-        <span class="macro">assert!</span>(<a class="self" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#181">self</a>
+        <a class="macro" href="https://doc.rust-lang.org/nightly/core/macro.assert.html">assert!</a>(<span class="self">self</span>
             .<span class="ident">adts_state</span>
             .<span class="ident">main_constructors</span>
-            .<span class="ident">insert</span>(<span class="ident">vir_low::ty::Domain::new</span>(<a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#182">domain_name</a>)));
-        <a class="self" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#181">self</a>.<a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#117-130">adt_register_variant_constructor</a>(
-            <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#182">domain_name</a>,
+            .<span class="ident">insert</span>(<span class="ident">vir_low::ty::Domain::new</span>(<span class="ident">domain_name</span>)));
+        <a class="self" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#187">self</a>.<a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#122-136">adt_register_variant_constructor</a>(
+            <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#188">domain_name</a>,
             <span class="string">&quot;&quot;</span>,
-            <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#183">parameters</a>,
-            <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#184">generate_top_down_injectivity_axiom</a>,
-            <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#185">top_down_injectivity_guard</a>,
+            <span class="bool-val">false</span>,
+            <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#189">parameters</a>,
+            <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#190">generate_injectivity_axioms</a>,
+            <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#191">top_down_injectivity_guard</a>,
         )
     }
     <span class="kw">fn</span> <span class="ident">adt_register_variant_constructor</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>(
         <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
         <span class="ident">domain_name</span>: <span class="kw-2">&amp;</span><a class="ident" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>,
         <span class="ident">variant_name</span>: <span class="kw-2">&amp;</span><a class="ident" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>,
+        <span class="ident">use_main_constructor_destructors</span>: <a class="ident" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a>,
         <span class="ident">parameters</span>: <span class="ident">Vec</span><span class="op">&lt;</span><a class="ident" href="../../../../../../vir/gen/low/ast/variable/struct.VariableDecl.html">vir_low::VariableDecl</a><span class="op">&gt;</span>,
-        <span class="ident">generate_top_down_injectivity_axiom</span>: <a class="ident" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a>,
+        <span class="ident">generate_injectivity_axioms</span>: <a class="ident" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a>,
         <span class="ident">top_down_injectivity_guard</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>,
     ) -&gt; <span class="ident">SpannedEncodingResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span>
     <span class="kw">where</span>
@@ -567,128 +599,145 @@
         )
             -&gt; <span class="ident">SpannedEncodingResult</span><span class="op">&lt;</span>(<a class="ident" href="../../../../../../vir/gen/low/ast/expression/enum.Expression.html">vir_low::Expression</a>, <a class="ident" href="../../../../../../vir/gen/low/ast/expression/enum.Expression.html">vir_low::Expression</a>)<span class="op">&gt;</span>,
     {
-        <span class="macro">assert!</span>(<a class="self" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#207">self</a>.<span class="ident">adts_state</span>.<span class="ident">variant_constructors</span>.<span class="ident">insert</span>((
-            <span class="ident">vir_low::ty::Domain::new</span>(<a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#208">domain_name</a>),
-            <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#209">variant_name</a>.<a class="ident" href="https://doc.rust-lang.org/nightly/alloc/string/trait.ToString.html">to_string</a>()
+        <a class="macro" href="https://doc.rust-lang.org/nightly/core/macro.assert.html">assert!</a>(<span class="self">self</span>.<span class="ident">adts_state</span>.<span class="ident">variant_constructors</span>.<span class="ident">insert</span>((
+            <span class="ident">vir_low::ty::Domain::new</span>(<span class="ident">domain_name</span>),
+            <span class="ident">variant_name</span>.<span class="ident">to_string</span>()
         )));
-        <span class="kw">let</span> <span class="ident">ty</span> <span class="op">=</span> <span class="ident">vir_low::Type::domain</span>(<a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#208">domain_name</a>.<a class="ident" href="https://doc.rust-lang.org/nightly/alloc/string/trait.ToString.html">to_string</a>());
+        <span class="kw">let</span> <span class="ident">ty</span> <span class="op">=</span> <span class="ident">vir_low::Type::domain</span>(<a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#215">domain_name</a>.<a class="ident" href="https://doc.rust-lang.org/nightly/alloc/string/trait.ToString.html">to_string</a>());
+
+        <span class="kw">let</span> <span class="ident">destructor_variant_name</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">use_main_constructor_destructors</span> {
+            <span class="string">&quot;&quot;</span>
+        } <span class="kw">else</span> {
+            <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#216">variant_name</a>
+        };
 
         <span class="comment">// Constructor.</span>
-        <span class="kw">let</span> <span class="ident">constructor_name</span> <span class="op">=</span> <a class="self" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#207">self</a>.<a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#33-37">adt_constructor_variant_name</a>(<a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#208">domain_name</a>, <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#209">variant_name</a>)<span class="question-mark">?</span>;
-        <a class="self" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#207">self</a>.<a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/lowerer/domains/interface.rs.html#56-62">declare_domain_function</a>(
-            <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#208">domain_name</a>,
-            <span class="ident">Cow::Borrowed</span>(<span class="kw-2">&amp;</span><a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#228">constructor_name</a>),
-            <span class="ident">Cow::Borrowed</span>(<span class="kw-2">&amp;</span><a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#210">parameters</a>),
-            <span class="ident">Cow::Borrowed</span>(<span class="kw-2">&amp;</span><a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#225">ty</a>),
+        <span class="kw">let</span> <span class="ident">constructor_name</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">adt_constructor_variant_name</span>(<span class="ident">domain_name</span>, <span class="ident">variant_name</span>)<span class="question-mark">?</span>;
+        <span class="self">self</span>.<span class="ident">declare_domain_function</span>(
+            <span class="ident">domain_name</span>,
+            <span class="ident">Cow::Borrowed</span>(<span class="kw-2">&amp;</span><span class="ident">constructor_name</span>),
+            <span class="bool-val">false</span>,
+            <span class="ident">Cow::Borrowed</span>(<span class="kw-2">&amp;</span><span class="ident">parameters</span>),
+            <span class="ident">Cow::Borrowed</span>(<span class="kw-2">&amp;</span><span class="ident">ty</span>),
         )<span class="question-mark">?</span>;
 
         <span class="comment">// Destructors.</span>
-        <span class="kw">let</span> <span class="ident">value</span> <span class="op">=</span> <span class="ident">vir_low::VariableDecl::new</span>(<span class="string">&quot;value&quot;</span>, <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#225">ty</a>.<a class="ident" href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html">clone</a>());
-        <span class="kw">for</span> <span class="ident">parameter</span> <span class="kw">in</span> <span class="kw-2">&amp;</span><a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#210">parameters</a> {
-            <span class="kw">let</span> <span class="ident">destructor_name</span> <span class="op">=</span>
-                <a class="self" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#207">self</a>.<a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#45-50">adt_destructor_variant_name</a>(<a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#208">domain_name</a>, <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#209">variant_name</a>, <span class="kw-2">&amp;</span><a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#238">parameter</a>.<span class="ident">name</span>)<span class="question-mark">?</span>;
-            <a class="self" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#207">self</a>.<a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/lowerer/domains/interface.rs.html#56-62">declare_domain_function</a>(
-                <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#208">domain_name</a>,
-                <span class="ident">Cow::Owned</span>(<a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#239">destructor_name</a>),
-                <span class="ident">Cow::Owned</span>(<span class="macro">vec!</span>[<a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#237">value</a>.<a class="ident" href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html">clone</a>()]),
-                <span class="ident">Cow::Borrowed</span>(<span class="kw-2">&amp;</span><a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#238">parameter</a>.<span class="ident">ty</span>),
+        <span class="kw">let</span> <span class="ident">value</span> <span class="op">=</span> <span class="ident">vir_low::VariableDecl::new</span>(<span class="string">&quot;value&quot;</span>, <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#233">ty</a>.<a class="ident" href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html">clone</a>());
+        <span class="kw">for</span> <span class="ident">parameter</span> <span class="kw">in</span> <span class="kw-2">&amp;</span><span class="ident">parameters</span> {
+            <span class="kw">let</span> <span class="ident">destructor_name</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">adt_destructor_variant_name</span>(
+                <span class="ident">domain_name</span>,
+                <span class="ident">destructor_variant_name</span>,
+                <span class="kw-2">&amp;</span><span class="ident">parameter</span>.<span class="ident">name</span>,
+            )<span class="question-mark">?</span>;
+            <span class="self">self</span>.<span class="ident">declare_domain_function</span>(
+                <span class="ident">domain_name</span>,
+                <span class="ident">Cow::Owned</span>(<span class="ident">destructor_name</span>),
+                <span class="bool-val">false</span>,
+                <span class="ident">Cow::Owned</span>(<span class="macro">vec!</span>[<span class="ident">value</span>.<span class="ident">clone</span>()]),
+                <span class="ident">Cow::Borrowed</span>(<span class="kw-2">&amp;</span><span class="ident">parameter</span>.<span class="ident">ty</span>),
             )<span class="question-mark">?</span>;
         }
 
         <span class="comment">// Injectivity axioms.</span>
-        <span class="kw">if</span> <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#210">parameters</a>.<span class="ident">is_empty</span>() {
+        <span class="kw">if</span> <span class="ident">parameters</span>.<span class="ident">is_empty</span>() {
             <span class="comment">// No need to generate injectivity axioms if the constructor has no parameters.</span>
             <span class="kw">return</span> <span class="prelude-val">Ok</span>(());
         }
 
-        <span class="kw">use</span> <a class="ident" href="../../../../../../vir/low/macros/index.html">vir_low::macros</a>::<span class="kw-2">*</span>;
-        <span class="comment">// Bottom-up injectivity axiom.</span>
-        {
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">triggers</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">conjuncts</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
-            <span class="kw">let</span> <span class="ident">constructor_call</span> <span class="op">=</span> <a class="self" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#207">self</a>.<a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#61-66">adt_constructor_variant_call</a>(
-                <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#208">domain_name</a>,
-                <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#209">variant_name</a>,
-                <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#210">parameters</a>
-                    .<span class="ident">iter</span>()
-                    .<a class="ident" href="https://doc.rust-lang.org/nightly/core/iter/traits/iterator/trait.Iterator.html">map</a>(<span class="op">|</span><span class="ident">argument</span><span class="op">|</span> <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#265">argument</a>.<a class="ident" href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html">clone</a>().<a class="ident" href="https://doc.rust-lang.org/nightly/core/convert/trait.Into.html">into</a>())
-                    .<a class="ident" href="https://doc.rust-lang.org/nightly/core/iter/traits/iterator/trait.Iterator.html">collect</a>(),
-            )<span class="question-mark">?</span>;
-            <span class="kw">for</span> <span class="ident">parameter</span> <span class="kw">in</span> <span class="kw-2">&amp;</span><a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#210">parameters</a> {
-                <span class="kw">let</span> <span class="ident">destructor_call</span> <span class="op">=</span> <a class="self" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#207">self</a>.<a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#82-89">adt_destructor_variant_call</a>(
-                    <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#208">domain_name</a>,
-                    <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#209">variant_name</a>,
-                    <span class="kw-2">&amp;</span><a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#268">parameter</a>.<span class="ident">name</span>,
-                    <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#268">parameter</a>.<span class="ident">ty</span>.<a class="ident" href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html">clone</a>(),
-                    <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#260">constructor_call</a>.<a class="ident" href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html">clone</a>(),
-                )<span class="question-mark">?</span>;
-                <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#258">triggers</a>.<span class="ident">push</span>(<span class="ident">vir_low::Trigger::new</span>(<span class="macro">vec!</span>[<a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#269">destructor_call</a>.<a class="ident" href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html">clone</a>()]));
-                <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#259">conjuncts</a>.<span class="ident">push</span>(<span class="macro">expr!</span> { [<a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#269">destructor_call</a>] <span class="op">==</span> <span class="ident">parameter</span> });
-            }
-            <span class="kw">let</span> <span class="ident">body</span> <span class="op">=</span> <span class="ident">vir_low::Expression::forall</span>(
-                <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#210">parameters</a>.<a class="ident" href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html">clone</a>(),
-                <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#258">triggers</a>,
-                <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#259">conjuncts</a>.<a class="ident" href="https://doc.rust-lang.org/nightly/core/iter/traits/collect/trait.IntoIterator.html">into_iter</a>().<a class="ident" href="../../../../../../vir/common/expression/trait.ExpressionIterator.html">conjoin</a>(),
-            );
-            <span class="kw">let</span> <span class="ident">axiom</span> <span class="op">=</span> <a class="ident" href="../../../../../../vir/gen/low/domain/struct.DomainAxiomDecl.html">vir_low::DomainAxiomDecl</a> {
-                <span class="ident">name</span>: <span class="macro">format!</span>(<span class="string">&quot;{}$bottom_up_injectivity_axiom&quot;</span>, <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#228">constructor_name</a>),
-                <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#279">body</a>,
-            };
-            <a class="self" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#207">self</a>.<a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/lowerer/domains/interface.rs.html#46-50">declare_axiom</a>(<a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#208">domain_name</a>, <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#284">axiom</a>)<span class="question-mark">?</span>;
-        }
+        <span class="kw">if</span> <span class="ident">generate_injectivity_axioms</span> {
+            <span class="comment">// We do not generate injectivity axioms for alternative</span>
+            <span class="comment">// constructors (that would be unsound).</span>
 
-        <span class="comment">// Top-down injectivity axiom. We do not generate top-down injectivity</span>
-        <span class="comment">// axioms for alternative constructors.</span>
-        <span class="kw">if</span> <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#211">generate_top_down_injectivity_axiom</a> {
-            <span class="macro">var_decls!</span> { <span class="ident">value</span>: {<a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#225">ty</a>} };
-            <span class="kw">let</span> (<span class="ident">trigger_guard</span>, <span class="ident">guard</span>) <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">guard_constructor</span>) <span class="op">=</span> <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#212">top_down_injectivity_guard</a>
+            <span class="kw">use</span> <a class="ident" href="../../../../../../vir/low/macros/index.html">vir_low::macros</a>::<span class="kw-2">*</span>;
+            <span class="comment">// Bottom-up injectivity axiom.</span>
             {
-                <span class="kw">let</span> (<span class="ident">trigger</span>, <span class="ident">guard</span>) <span class="op">=</span> <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#295">guard_constructor</a>(<a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#208">domain_name</a>, <span class="kw-2">&amp;</span><a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#294">value</a>)<span class="question-mark">?</span>;
-                (<span class="prelude-val">Some</span>(<a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#297">trigger</a>), <span class="prelude-val">Some</span>(<a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#297">guard</a>))
+                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">triggers</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
+                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">conjuncts</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
+                <span class="kw">let</span> <span class="ident">constructor_call</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">adt_constructor_variant_call</span>(
+                    <span class="ident">domain_name</span>,
+                    <span class="ident">variant_name</span>,
+                    <span class="ident">parameters</span>
+                        .<span class="ident">iter</span>()
+                        .<span class="ident">map</span>(<span class="op">|</span><span class="ident">argument</span><span class="op">|</span> <span class="ident">argument</span>.<span class="ident">clone</span>().<span class="ident">into</span>())
+                        .<span class="ident">collect</span>(),
+                )<span class="question-mark">?</span>;
+                <span class="kw">for</span> <span class="ident">parameter</span> <span class="kw">in</span> <span class="kw-2">&amp;</span><span class="ident">parameters</span> {
+                    <span class="kw">let</span> <span class="ident">destructor_call</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">adt_destructor_variant_call</span>(
+                        <span class="ident">domain_name</span>,
+                        <span class="ident">destructor_variant_name</span>,
+                        <span class="kw-2">&amp;</span><span class="ident">parameter</span>.<span class="ident">name</span>,
+                        <span class="ident">parameter</span>.<span class="ident">ty</span>.<span class="ident">clone</span>(),
+                        <span class="ident">constructor_call</span>.<span class="ident">clone</span>(),
+                    )<span class="question-mark">?</span>;
+                    <span class="ident">triggers</span>.<span class="ident">push</span>(<span class="ident">vir_low::Trigger::new</span>(<span class="macro">vec!</span>[<span class="ident">constructor_call</span>.<span class="ident">clone</span>()]));
+                    <span class="ident">conjuncts</span>.<span class="ident">push</span>(<span class="macro">expr!</span> { [<span class="ident">destructor_call</span>] <span class="op">==</span> <span class="ident">parameter</span> });
+                }
+                <span class="kw">let</span> <span class="ident">body</span> <span class="op">=</span> <span class="ident">vir_low::Expression::forall</span>(
+                    <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#218">parameters</a>.<a class="ident" href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html">clone</a>(),
+                    <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#281">triggers</a>,
+                    <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#282">conjuncts</a>.<a class="ident" href="https://doc.rust-lang.org/nightly/core/iter/traits/collect/trait.IntoIterator.html">into_iter</a>().<a class="ident" href="../../../../../../vir/common/expression/trait.ExpressionIterator.html">conjoin</a>(),
+                );
+                <span class="kw">let</span> <span class="ident">axiom</span> <span class="op">=</span> <a class="ident" href="../../../../../../vir/gen/low/domain/struct.DomainAxiomDecl.html">vir_low::DomainAxiomDecl</a> {
+                    <span class="ident">name</span>: <a class="macro" href="https://doc.rust-lang.org/nightly/alloc/macro.format.html">format!</a>(<span class="string">&quot;{}$bottom_up_injectivity_axiom&quot;</span>, <span class="ident">constructor_name</span>),
+                    <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#302">body</a>,
+                };
+                <span class="self">self</span>.<span class="ident">declare_axiom</span>(<span class="ident">domain_name</span>, <span class="ident">axiom</span>)<span class="question-mark">?</span>;
+            }
+
+            <span class="comment">// Top-down injectivity axiom.</span>
+
+            <a class="macro" href="../../../../../../vir/low/macros/macro.var_decls.html">var_decls!</a> { <span class="ident">value</span>: {<span class="ident">ty</span>} };
+            <span class="kw">let</span> (<span class="ident">trigger_guard</span>, <span class="ident">guard</span>) <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">guard_constructor</span>) <span class="op">=</span> <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#220">top_down_injectivity_guard</a>
+            {
+                <span class="kw">let</span> (<span class="ident">trigger</span>, <span class="ident">guard</span>) <span class="op">=</span> <span class="ident">guard_constructor</span>(<span class="ident">domain_name</span>, <span class="kw-2">&amp;</span><span class="ident">value</span>)<span class="question-mark">?</span>;
+                (<span class="prelude-val">Some</span>(<a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#319">trigger</a>), <span class="prelude-val">Some</span>(<a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#319">guard</a>))
             } <span class="kw">else</span> {
                 (<span class="prelude-val">None</span>, <span class="prelude-val">None</span>)
             };
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">triggers</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">arguments</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
-            <span class="kw">for</span> <span class="ident">parameter</span> <span class="kw">in</span> <span class="kw-2">&amp;</span><a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#210">parameters</a> {
-                <span class="kw">let</span> <span class="ident">destructor_call</span> <span class="op">=</span> <a class="self" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#207">self</a>.<a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#82-89">adt_destructor_variant_call</a>(
-                    <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#208">domain_name</a>,
-                    <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#209">variant_name</a>,
-                    <span class="kw-2">&amp;</span><a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#304">parameter</a>.<span class="ident">name</span>,
-                    <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#304">parameter</a>.<span class="ident">ty</span>.<a class="ident" href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html">clone</a>(),
-                    <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#294">value</a>.<a class="ident" href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html">clone</a>().<a class="ident" href="https://doc.rust-lang.org/nightly/core/convert/trait.Into.html">into</a>(),
+            <span class="kw">for</span> <span class="ident">parameter</span> <span class="kw">in</span> <span class="kw-2">&amp;</span><span class="ident">parameters</span> {
+                <span class="kw">let</span> <span class="ident">destructor_call</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">adt_destructor_variant_call</span>(
+                    <span class="ident">domain_name</span>,
+                    <span class="ident">destructor_variant_name</span>,
+                    <span class="kw-2">&amp;</span><span class="ident">parameter</span>.<span class="ident">name</span>,
+                    <span class="ident">parameter</span>.<span class="ident">ty</span>.<span class="ident">clone</span>(),
+                    <span class="ident">value</span>.<span class="ident">clone</span>().<span class="ident">into</span>(),
                 )<span class="question-mark">?</span>;
-                <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">guard</span>) <span class="op">=</span> <span class="kw-2">&amp;</span><a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#295">trigger_guard</a> {
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">terms</span> <span class="op">=</span> <span class="macro">vec!</span>[<a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#312">guard</a>.<a class="ident" href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html">clone</a>()];
-                    <span class="kw">if</span> <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#210">parameters</a>.<span class="ident">len</span>() <span class="op">!</span><span class="op">=</span> <span class="number">1</span> {
-                        <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#313">terms</a>.<span class="ident">push</span>(<a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#305">destructor_call</a>.<a class="ident" href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html">clone</a>());
+                <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">guard</span>) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">trigger_guard</span> {
+                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">terms</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="ident">guard</span>.<span class="ident">clone</span>()];
+                    <span class="kw">if</span> <span class="ident">parameters</span>.<span class="ident">len</span>() <span class="op">!</span><span class="op">=</span> <span class="number">1</span> {
+                        <span class="ident">terms</span>.<span class="ident">push</span>(<span class="ident">destructor_call</span>.<span class="ident">clone</span>());
                     }
-                    <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#302">triggers</a>.<span class="ident">push</span>(<span class="ident">vir_low::Trigger::new</span>(<a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#313">terms</a>));
+                    <span class="ident">triggers</span>.<span class="ident">push</span>(<span class="ident">vir_low::Trigger::new</span>(<span class="ident">terms</span>));
                 } <span class="kw">else</span> {
                     <span class="macro">unimplemented!</span>(<span class="string">&quot;figure out what triggers to choose to avoid matching loop!&quot;</span>);
                 }
-                <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#303">arguments</a>.<span class="ident">push</span>(<a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#305">destructor_call</a>);
+                <span class="ident">arguments</span>.<span class="ident">push</span>(<span class="ident">destructor_call</span>);
             }
             <span class="kw">let</span> <span class="ident">constructor_call</span> <span class="op">=</span>
-                <a class="self" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#207">self</a>.<a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#61-66">adt_constructor_variant_call</a>(<a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#208">domain_name</a>, <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#209">variant_name</a>, <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#303">arguments</a>)<span class="question-mark">?</span>;
-            <span class="kw">let</span> <span class="ident">equality</span> <span class="op">=</span> <span class="macro">expr!</span> { <span class="ident">value</span> <span class="op">==</span> [<a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#323">constructor_call</a>] };
-            <span class="kw">let</span> <span class="ident">forall_body</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">guard</span>) <span class="op">=</span> <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#295">guard</a> {
-                <span class="macro">expr!</span> { [<a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#326">guard</a>] <span class="op">==</span><span class="op">&gt;</span> [<a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#325">equality</a>] }
+                <span class="self">self</span>.<span class="ident">adt_constructor_variant_call</span>(<span class="ident">domain_name</span>, <span class="ident">variant_name</span>, <span class="ident">arguments</span>)<span class="question-mark">?</span>;
+            <span class="kw">let</span> <span class="ident">equality</span> <span class="op">=</span> <a class="macro" href="../../../../../../vir/vir/low/macros/macro.expr.html">expr!</a> { <span class="ident">value</span> <span class="op">==</span> [<span class="ident">constructor_call</span>] };
+            <span class="kw">let</span> <span class="ident">forall_body</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">guard</span>) <span class="op">=</span> <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#317">guard</a> {
+                <a class="macro" href="../../../../../../vir/vir/low/macros/macro.expr.html">expr!</a> { [<span class="ident">guard</span>] <span class="op">==</span><span class="op">&gt;</span> [<span class="ident">equality</span>] }
             } <span class="kw">else</span> {
-                <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#325">equality</a>
+                <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#347">equality</a>
             };
             <span class="kw">let</span> <span class="ident">axiom</span> <span class="op">=</span> <a class="ident" href="../../../../../../vir/gen/low/domain/struct.DomainAxiomDecl.html">vir_low::DomainAxiomDecl</a> {
-                <span class="ident">name</span>: <span class="macro">format!</span>(<span class="string">&quot;{}$top_down_injectivity_axiom&quot;</span>, <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#228">constructor_name</a>),
-                <span class="ident">body</span>: <span class="ident">vir_low::Expression::forall</span>(<span class="macro">vec!</span>[<a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#294">value</a>], <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#302">triggers</a>, <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#326">forall_body</a>),
+                <span class="ident">name</span>: <a class="macro" href="https://doc.rust-lang.org/nightly/alloc/macro.format.html">format!</a>(<span class="string">&quot;{}$top_down_injectivity_axiom&quot;</span>, <span class="ident">constructor_name</span>),
+                <span class="ident">body</span>: <span class="ident">vir_low::Expression::forall</span>(<a class="macro" href="https://doc.rust-lang.org/nightly/alloc/macro.vec.html">vec!</a>[<span class="ident">value</span>], <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#324">triggers</a>, <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#348">forall_body</a>),
             };
-            <a class="self" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#207">self</a>.<a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/lowerer/domains/interface.rs.html#46-50">declare_axiom</a>(<a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#208">domain_name</a>, <a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#331">axiom</a>)<span class="question-mark">?</span>;
+            <span class="self">self</span>.<span class="ident">declare_axiom</span>(<span class="ident">domain_name</span>, <span class="ident">axiom</span>)<span class="question-mark">?</span>;
         } <span class="kw">else</span> {
-            <span class="macro">assert!</span>(<a class="ident" href="../../../../../../src/prusti_viper/encoder/middle/core_proof/adts/interface.rs.html#212">top_down_injectivity_guard</a>.<span class="ident">is_none</span>(), <span class="string">&quot;top-down injectivity guard is Some while generate_top_down_injectivity_axiom is true&quot;</span>);
+            <a class="macro" href="https://doc.rust-lang.org/nightly/core/macro.assert.html">assert!</a>(
+                <span class="ident">top_down_injectivity_guard</span>.<span class="ident">is_none</span>(),
+                <span class="string">&quot;top-down injectivity guard is Some while generate_injectivity_axioms is false&quot;</span>
+            );
         }
 
         <span class="prelude-val">Ok</span>(())
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../../" data-current-crate="prusti_viper" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0-nightly (42e1761c7 2022-05-15)" ></div>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../../" data-current-crate="prusti_viper" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0-nightly (7425fb293 2022-06-30)" ></div>
 </body></html>

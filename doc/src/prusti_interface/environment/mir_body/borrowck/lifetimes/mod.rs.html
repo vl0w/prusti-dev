@@ -1,9 +1,8 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `prusti-interface/src/environment/mir_body/borrowck/lifetimes/mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../../storage.js"></script><script src="../../../../../../crates.js"></script><script defer src="../../../../../../main.js"></script><script defer src="../../../../../../source-script.js"></script><script defer src="../../../../../../source-files.js"></script>
-    <noscript><link rel="stylesheet" href="../../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../../prusti_interface/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../../rust-logo.svg" alt="logo"></div>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `prusti-interface/src/environment/mir_body/borrowck/lifetimes/mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../../storage.js"></script><script defer src="../../../../../../source-script.js"></script><script defer src="../../../../../../source-files.js"></script><script defer src="../../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../../prusti_interface/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../../rust-logo.svg" alt="logo"></div>
         </a><h2 class="location"></h2>
     </nav>
     <nav class="sidebar"><a class="sidebar-logo" href="../../../../../../prusti_interface/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../../rust-logo.svg" alt="logo"></div>
-        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../../prusti_interface/index.html"><img class="rust-logo" src="../../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><div id="settings-menu" tabindex="-1">
+        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../../prusti_interface/index.html"><img class="rust-logo" src="../../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1">
                                 <a href="../../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../../wheel.svg"></a></div>
                         </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
@@ -146,11 +145,76 @@
 <span id="139">139</span>
 <span id="140">140</span>
 <span id="141">141</span>
+<span id="142">142</span>
+<span id="143">143</span>
+<span id="144">144</span>
+<span id="145">145</span>
+<span id="146">146</span>
+<span id="147">147</span>
+<span id="148">148</span>
+<span id="149">149</span>
+<span id="150">150</span>
+<span id="151">151</span>
+<span id="152">152</span>
+<span id="153">153</span>
+<span id="154">154</span>
+<span id="155">155</span>
+<span id="156">156</span>
+<span id="157">157</span>
+<span id="158">158</span>
+<span id="159">159</span>
+<span id="160">160</span>
+<span id="161">161</span>
+<span id="162">162</span>
+<span id="163">163</span>
+<span id="164">164</span>
+<span id="165">165</span>
+<span id="166">166</span>
+<span id="167">167</span>
+<span id="168">168</span>
+<span id="169">169</span>
+<span id="170">170</span>
+<span id="171">171</span>
+<span id="172">172</span>
+<span id="173">173</span>
+<span id="174">174</span>
+<span id="175">175</span>
+<span id="176">176</span>
+<span id="177">177</span>
+<span id="178">178</span>
+<span id="179">179</span>
+<span id="180">180</span>
+<span id="181">181</span>
+<span id="182">182</span>
+<span id="183">183</span>
+<span id="184">184</span>
+<span id="185">185</span>
+<span id="186">186</span>
+<span id="187">187</span>
+<span id="188">188</span>
+<span id="189">189</span>
+<span id="190">190</span>
+<span id="191">191</span>
+<span id="192">192</span>
+<span id="193">193</span>
+<span id="194">194</span>
+<span id="195">195</span>
+<span id="196">196</span>
+<span id="197">197</span>
+<span id="198">198</span>
+<span id="199">199</span>
+<span id="200">200</span>
+<span id="201">201</span>
+<span id="202">202</span>
+<span id="203">203</span>
+<span id="204">204</span>
+<span id="205">205</span>
+<span id="206">206</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="ident"><span class="kw">super</span>::facts</span>::{
-    <a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/facts/mod.rs.html#15">AllInputFacts</a>, <a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/facts/mod.rs.html#18-25">BorrowckFacts</a>, <a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/facts/mod.rs.html#10">Loan</a>, <a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/facts/mod.rs.html#73-78">LocationTable</a>, <a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/facts/mod.rs.html#11">Point</a>, <a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/facts/mod.rs.html#9">Region</a>, <a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/facts/mod.rs.html#42-45">RichLocation</a>,
+    <a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/facts/mod.rs.html#15">AllInputFacts</a>, <a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/facts/mod.rs.html#18-25">BorrowckFacts</a>, <a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/facts/mod.rs.html#10">Loan</a>, <a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/facts/mod.rs.html#83-88">LocationTable</a>, <a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/facts/mod.rs.html#11">Point</a>, <a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/facts/mod.rs.html#9">Region</a>, <a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/facts/mod.rs.html#42-45">RichLocation</a>,
 };
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::environment::debug_utils::to_text</span>::{<a class="ident" href="../../../../../../src/prusti_interface/environment/debug_utils/to_text.rs.html#15">opaque_lifetime_string</a>, <a class="ident" href="../../../../../../src/prusti_interface/environment/debug_utils/to_text.rs.html#5-7">ToText</a>};
-<span class="kw">use</span> <a class="ident" href="https://doc.rust-lang.org/nightly/nightly-rustc/rustc_middle/mir/index.html">rustc_middle::mir</a>;
+<span class="kw">use</span> <a class="ident" href="https://doc.rust-lang.org/nightly/nightly-rustc/rustc_middle/mir/index.html">prusti_rustc_interface::middle::mir</a>;
 <span class="kw">use</span> <span class="ident">std::collections</span>::{<a class="ident" href="https://doc.rust-lang.org/nightly/alloc/collections/btree/map/struct.BTreeMap.html">BTreeMap</a>, <a class="ident" href="https://doc.rust-lang.org/nightly/alloc/collections/btree/set/struct.BTreeSet.html">BTreeSet</a>};
 
 <span class="kw">mod</span> <a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/graphviz.rs.html#1-116">graphviz</a>;
@@ -168,32 +232,65 @@
 }
 
 <span class="kw">impl</span> <a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#12-14">Lifetimes</a> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">input_facts</span>: <a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/facts/mod.rs.html#15">AllInputFacts</a>, <span class="ident">location_table</span>: <a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/facts/mod.rs.html#73-78">LocationTable</a>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">output_facts</span> <span class="op">=</span>
-            <span class="ident">polonius_engine::Output::compute</span>(<span class="kw-2">&amp;</span><a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#23">input_facts</a>, <span class="ident">polonius_engine::Algorithm::Naive</span>, <span class="bool-val">true</span>);
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="kw-2">mut</span> <span class="ident">input_facts</span>: <a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/facts/mod.rs.html#15">AllInputFacts</a>, <span class="ident">location_table</span>: <a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/facts/mod.rs.html#83-88">LocationTable</a>) -&gt; <span class="self">Self</span> {
+        <span class="kw">let</span> <span class="ident">entry_block</span> <span class="op">=</span> <span class="ident">mir::START_BLOCK</span>;
+        <span class="kw">let</span> <span class="ident">entry_point</span> <span class="op">=</span> <a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#23">location_table</a>.<a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/facts/mod.rs.html#104">location_to_point</a>(<a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/facts/mod.rs.html#43">RichLocation::Start</a>(<a class="ident" href="https://doc.rust-lang.org/nightly/nightly-rustc/rustc_middle/mir/struct.Location.html">mir::Location</a> {
+            <span class="ident">block</span>: <a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#24">entry_block</a>,
+            <span class="ident">statement_index</span>: <span class="number">0</span>,
+        }));
+        <span class="kw">for</span> (<span class="ident">origin</span>, <span class="ident">loan</span>) <span class="kw">in</span> <span class="kw-2">&amp;</span><span class="ident">input_facts</span>.<span class="ident">placeholder</span> {
+            <span class="ident">input_facts</span>
+                .<span class="ident">loan_issued_at</span>
+                .<span class="ident">push</span>((<span class="kw-2">*</span><span class="ident">origin</span>, <span class="kw-2">*</span><span class="ident">loan</span>, <span class="ident">entry_point</span>));
+        }
+        <span class="kw">for</span> (<span class="ident">origin1</span>, <span class="ident">origin2</span>) <span class="kw">in</span> <span class="kw-2">&amp;</span><span class="ident">input_facts</span>.<span class="ident">known_placeholder_subset</span> {
+            <span class="ident">input_facts</span>
+                .<span class="ident">subset_base</span>
+                .<span class="ident">push</span>((<span class="kw-2">*</span><span class="ident">origin1</span>, <span class="kw-2">*</span><span class="ident">origin2</span>, <span class="ident">entry_point</span>));
+        }
+        <span class="kw">let</span> <span class="ident">output_facts</span> <span class="op">=</span> <span class="ident">prusti_rustc_interface::polonius_engine::Output::compute</span>(
+            <span class="kw-2">&amp;</span><a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#23">input_facts</a>,
+            <span class="ident">prusti_rustc_interface::polonius_engine::Algorithm::Naive</span>,
+            <span class="bool-val">true</span>,
+        );
+        <a class="macro" href="https://doc.rust-lang.org/nightly/core/macro.assert.html">assert!</a>(<span class="ident">output_facts</span>.<span class="ident">errors</span>.<span class="ident">is_empty</span>());
         <span class="self">Self</span> {
-            <span class="ident">facts</span>: <span class="ident">BorrowckFacts::new</span>(<a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#23">input_facts</a>, <a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#24">output_facts</a>, <a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#23">location_table</a>),
+            <span class="ident">facts</span>: <span class="ident">BorrowckFacts::new</span>(<a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#23">input_facts</a>, <a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#39">output_facts</a>, <a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#23">location_table</a>),
         }
     }
 
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_loan_live_at_start</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">location</span>: <a class="ident" href="https://doc.rust-lang.org/nightly/nightly-rustc/rustc_middle/mir/struct.Location.html">mir::Location</a>) -&gt; <span class="ident">BTreeSet</span><span class="op">&lt;</span><a class="ident" href="https://doc.rust-lang.org/nightly/alloc/string/struct.String.html">String</a><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">info</span> <span class="op">=</span> <a class="self" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#31">self</a>.<a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#101">get_loan_live_at</a>(<a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/facts/mod.rs.html#43">RichLocation::Start</a>(<a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#31">location</a>));
-        <a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#32">info</a>.<a class="ident" href="https://doc.rust-lang.org/nightly/core/iter/traits/collect/trait.IntoIterator.html">into_iter</a>()
-            .<a class="ident" href="https://doc.rust-lang.org/nightly/core/iter/traits/iterator/trait.Iterator.html">map</a>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <a class="ident" href="../../../../../../src/prusti_interface/environment/debug_utils/to_text.rs.html#15">opaque_lifetime_string</a>(<a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#34">x</a>.<span class="ident">index</span>()))
+        <span class="kw">let</span> <span class="ident">info</span> <span class="op">=</span> <a class="self" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#50">self</a>.<a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#143">get_loan_live_at</a>(<a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/facts/mod.rs.html#43">RichLocation::Start</a>(<a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#50">location</a>));
+        <a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#51">info</a>.<a class="ident" href="https://doc.rust-lang.org/nightly/core/iter/traits/collect/trait.IntoIterator.html">into_iter</a>()
+            .<a class="ident" href="https://doc.rust-lang.org/nightly/core/iter/traits/iterator/trait.Iterator.html">map</a>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <a class="ident" href="../../../../../../src/prusti_interface/environment/debug_utils/to_text.rs.html#15">opaque_lifetime_string</a>(<a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#53">x</a>.<span class="ident">index</span>()))
             .<a class="ident" href="https://doc.rust-lang.org/nightly/core/iter/traits/iterator/trait.Iterator.html">collect</a>()
+    }
+
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_origin_contains_loan_at_start</span>(
+        <span class="kw-2">&amp;</span><span class="self">self</span>,
+        <span class="ident">location</span>: <a class="ident" href="https://doc.rust-lang.org/nightly/nightly-rustc/rustc_middle/mir/struct.Location.html">mir::Location</a>,
+    ) -&gt; <span class="ident">BTreeMap</span><span class="op">&lt;</span><a class="ident" href="https://doc.rust-lang.org/nightly/alloc/string/struct.String.html">String</a>, <span class="ident">BTreeSet</span><span class="op">&lt;</span><a class="ident" href="https://doc.rust-lang.org/nightly/alloc/string/struct.String.html">String</a><span class="op">&gt;</span><span class="op">&gt;</span> {
+        <a class="self" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#58">self</a>.<a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#71-74">get_origin_contains_loan_at_location</a>(<a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/facts/mod.rs.html#43">RichLocation::Start</a>(<a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#59">location</a>))
     }
 
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_origin_contains_loan_at_mid</span>(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
         <span class="ident">location</span>: <a class="ident" href="https://doc.rust-lang.org/nightly/nightly-rustc/rustc_middle/mir/struct.Location.html">mir::Location</a>,
     ) -&gt; <span class="ident">BTreeMap</span><span class="op">&lt;</span><a class="ident" href="https://doc.rust-lang.org/nightly/alloc/string/struct.String.html">String</a>, <span class="ident">BTreeSet</span><span class="op">&lt;</span><a class="ident" href="https://doc.rust-lang.org/nightly/alloc/string/struct.String.html">String</a><span class="op">&gt;</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">info</span> <span class="op">=</span> <a class="self" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#39">self</a>.<a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#110-113">get_origin_contains_loan_at</a>(<a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/facts/mod.rs.html#44">RichLocation::Mid</a>(<a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#40">location</a>));
-        <a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#42">info</a>.<span class="ident">iter</span>()
+        <a class="self" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#65">self</a>.<a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#71-74">get_origin_contains_loan_at_location</a>(<a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/facts/mod.rs.html#44">RichLocation::Mid</a>(<a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#66">location</a>))
+    }
+
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_origin_contains_loan_at_location</span>(
+        <span class="kw-2">&amp;</span><span class="self">self</span>,
+        <span class="ident">location</span>: <a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/facts/mod.rs.html#42-45">RichLocation</a>,
+    ) -&gt; <span class="ident">BTreeMap</span><span class="op">&lt;</span><a class="ident" href="https://doc.rust-lang.org/nightly/alloc/string/struct.String.html">String</a>, <span class="ident">BTreeSet</span><span class="op">&lt;</span><a class="ident" href="https://doc.rust-lang.org/nightly/alloc/string/struct.String.html">String</a><span class="op">&gt;</span><span class="op">&gt;</span> {
+        <span class="kw">let</span> <span class="ident">info</span> <span class="op">=</span> <a class="self" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#72">self</a>.<a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#152-155">get_origin_contains_loan_at</a>(<a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#73">location</a>);
+        <a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#75">info</a>.<span class="ident">iter</span>()
             .<a class="ident" href="https://doc.rust-lang.org/nightly/core/iter/traits/iterator/trait.Iterator.html">map</a>(<span class="op">|</span>(<span class="ident">k</span>, <span class="ident">v</span>)<span class="op">|</span> {
                 (
-                    <a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#44">k</a>.<a class="ident" href="../../../../../../src/prusti_interface/environment/debug_utils/to_text.rs.html#6">to_text</a>(),
-                    <a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#44">v</a>.<span class="ident">iter</span>()
-                        .<a class="ident" href="https://doc.rust-lang.org/nightly/core/iter/traits/iterator/trait.Iterator.html">map</a>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <a class="ident" href="../../../../../../src/prusti_interface/environment/debug_utils/to_text.rs.html#15">opaque_lifetime_string</a>(<a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#48">x</a>.<span class="ident">index</span>()))
+                    <a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#77">k</a>.<a class="ident" href="../../../../../../src/prusti_interface/environment/debug_utils/to_text.rs.html#6">to_text</a>(),
+                    <a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#77">v</a>.<span class="ident">iter</span>()
+                        .<a class="ident" href="https://doc.rust-lang.org/nightly/core/iter/traits/iterator/trait.Iterator.html">map</a>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <a class="ident" href="../../../../../../src/prusti_interface/environment/debug_utils/to_text.rs.html#15">opaque_lifetime_string</a>(<a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#81">x</a>.<span class="ident">index</span>()))
                         .<a class="ident" href="https://doc.rust-lang.org/nightly/core/iter/traits/iterator/trait.Iterator.html">collect</a>(),
                 )
             })
@@ -201,55 +298,64 @@
     }
 
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">lifetime_count</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <a class="ident" href="https://doc.rust-lang.org/nightly/std/primitive.usize.html">usize</a> {
-        <span class="kw">let</span> <span class="ident">original_lifetimes_count</span> <span class="op">=</span> <a class="self" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#55">self</a>.<a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#88">get_original_lifetimes</a>().<span class="ident">len</span>();
-        <span class="kw">let</span> <span class="ident">subset_lifetimes</span>: <span class="ident">BTreeSet</span><span class="op">&lt;</span><a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/facts/mod.rs.html#9">Region</a><span class="op">&gt;</span> <span class="op">=</span> <a class="self" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#55">self</a>
+        <span class="kw">let</span> <span class="ident">original_lifetimes_count</span> <span class="op">=</span> <a class="self" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#88">self</a>.<a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#130">get_original_lifetimes</a>().<span class="ident">len</span>();
+        <span class="kw">let</span> <span class="ident">subset_lifetimes</span>: <span class="ident">BTreeSet</span><span class="op">&lt;</span><a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/facts/mod.rs.html#9">Region</a><span class="op">&gt;</span> <span class="op">=</span> <a class="self" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#88">self</a>
             .<span class="ident">facts</span>
             .<span class="ident">input_facts</span>
             .<span class="ident">subset_base</span>
             .<span class="ident">iter</span>()
-            .<a class="ident" href="https://doc.rust-lang.org/nightly/core/iter/traits/iterator/trait.Iterator.html">flat_map</a>(<span class="op">|</span><span class="kw-2">&amp;</span>(<span class="ident">r1</span>, <span class="ident">r2</span>, <span class="kw">_</span>)<span class="op">|</span> [<a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#62">r1</a>, <a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#62">r2</a>])
+            .<a class="ident" href="https://doc.rust-lang.org/nightly/core/iter/traits/iterator/trait.Iterator.html">flat_map</a>(<span class="op">|</span><span class="kw-2">&amp;</span>(<span class="ident">r1</span>, <span class="ident">r2</span>, <span class="kw">_</span>)<span class="op">|</span> [<a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#95">r1</a>, <a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#95">r2</a>])
             .<a class="ident" href="https://doc.rust-lang.org/nightly/core/iter/traits/iterator/trait.Iterator.html">collect</a>();
-        <span class="kw">let</span> <span class="ident">opaque_lifetimes_count</span> <span class="op">=</span> <a class="self" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#55">self</a>
-            .<a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#72">get_opaque_lifetimes_with_inclusions_names</a>()
+        <span class="kw">let</span> <span class="ident">opaque_lifetimes_count</span> <span class="op">=</span> <a class="self" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#88">self</a>
+            .<a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#105">get_opaque_lifetimes_with_inclusions_names</a>()
             .<span class="ident">keys</span>()
             .<a class="ident" href="https://doc.rust-lang.org/nightly/core/iter/traits/iterator/trait.Iterator.html">count</a>();
-        <span class="kw">let</span> <span class="ident">subset_lifetimes_count</span> <span class="op">=</span> <a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#57">subset_lifetimes</a>.<span class="ident">len</span>();
-        <a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#56">original_lifetimes_count</a> <span class="op">+</span> <a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#68">subset_lifetimes_count</a> <span class="op">+</span> <a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#64">opaque_lifetimes_count</a>
+        <span class="kw">let</span> <span class="ident">subset_lifetimes_count</span> <span class="op">=</span> <a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#90">subset_lifetimes</a>.<span class="ident">len</span>();
+        <a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#89">original_lifetimes_count</a> <span class="op">+</span> <a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#101">subset_lifetimes_count</a> <span class="op">+</span> <a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#97">opaque_lifetimes_count</a>
     }
 
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_opaque_lifetimes_with_inclusions_names</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">BTreeMap</span><span class="op">&lt;</span><a class="ident" href="https://doc.rust-lang.org/nightly/alloc/string/struct.String.html">String</a>, <span class="ident">BTreeSet</span><span class="op">&lt;</span><a class="ident" href="https://doc.rust-lang.org/nightly/alloc/string/struct.String.html">String</a><span class="op">&gt;</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">opaque_lifetimes</span> <span class="op">=</span> <a class="self" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#72">self</a>.<a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/graphviz.rs.html#24">get_opaque_lifetimes_with_inclusions</a>();
+        <span class="kw">let</span> <span class="ident">opaque_lifetimes</span> <span class="op">=</span> <a class="self" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#105">self</a>.<a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/graphviz.rs.html#24">get_opaque_lifetimes_with_inclusions</a>();
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">BTreeMap::new</span>();
-        <span class="kw">for</span> <span class="ident">lifetime_with_inclusions</span> <span class="kw">in</span> <a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#73">opaque_lifetimes</a> {
-            <a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#74">result</a>.<span class="ident">insert</span>(
-                <a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#75">lifetime_with_inclusions</a>.<span class="ident">lifetime</span>.<a class="ident" href="../../../../../../src/prusti_interface/environment/debug_utils/to_text.rs.html#6">to_text</a>(),
-                <a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#75">lifetime_with_inclusions</a>
+        <span class="kw">for</span> <span class="ident">lifetime_with_inclusions</span> <span class="kw">in</span> <span class="ident">opaque_lifetimes</span> {
+            <span class="ident">result</span>.<span class="ident">insert</span>(
+                <span class="ident">lifetime_with_inclusions</span>.<span class="ident">lifetime</span>.<span class="ident">to_text</span>(),
+                <span class="ident">lifetime_with_inclusions</span>
                     .<span class="ident">included_in</span>
                     .<span class="ident">iter</span>()
-                    .<a class="ident" href="https://doc.rust-lang.org/nightly/core/iter/traits/iterator/trait.Iterator.html">map</a>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#81">x</a>.<a class="ident" href="../../../../../../src/prusti_interface/environment/debug_utils/to_text.rs.html#6">to_text</a>())
-                    .<a class="ident" href="https://doc.rust-lang.org/nightly/core/iter/traits/iterator/trait.Iterator.html">collect</a>(),
+                    .<span class="ident">map</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span>.<span class="ident">to_text</span>())
+                    .<span class="ident">collect</span>(),
             );
         }
-        <a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#74">result</a>
+        <a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#107">result</a>
+    }
+
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_opaque_lifetimes_with_names</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><a class="ident" href="https://doc.rust-lang.org/nightly/alloc/string/struct.String.html">String</a><span class="op">&gt;</span> {
+        <a class="self" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#121">self</a>.<span class="ident">facts</span>
+            .<span class="ident">input_facts</span>
+            .<span class="ident">placeholder</span>
+            .<span class="ident">iter</span>()
+            .<a class="ident" href="https://doc.rust-lang.org/nightly/core/iter/traits/iterator/trait.Iterator.html">map</a>(<span class="op">|</span>(<span class="kw">_</span>, <span class="ident">loan</span>)<span class="op">|</span> <a class="ident" href="../../../../../../src/prusti_interface/environment/debug_utils/to_text.rs.html#15">opaque_lifetime_string</a>(<a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#126">loan</a>.<span class="ident">index</span>()))
+            .<a class="ident" href="https://doc.rust-lang.org/nightly/core/iter/traits/iterator/trait.Iterator.html">collect</a>()
     }
 
     <span class="kw">fn</span> <span class="ident">get_original_lifetimes</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/facts/mod.rs.html#9">Region</a><span class="op">&gt;</span> {
-        <a class="self" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#88">self</a>.<span class="ident">facts</span>
+        <a class="self" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#130">self</a>.<span class="ident">facts</span>
             .<span class="ident">input_facts</span>
             .<span class="ident">loan_issued_at</span>
             .<span class="ident">iter</span>()
-            .<a class="ident" href="https://doc.rust-lang.org/nightly/core/iter/traits/iterator/trait.Iterator.html">map</a>(<span class="op">|</span>(<span class="ident">region</span>, <span class="kw">_</span>, <span class="kw">_</span>)<span class="op">|</span> <span class="kw-2">*</span><a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#93">region</a>)
+            .<a class="ident" href="https://doc.rust-lang.org/nightly/core/iter/traits/iterator/trait.Iterator.html">map</a>(<span class="op">|</span>(<span class="ident">region</span>, <span class="kw">_</span>, <span class="kw">_</span>)<span class="op">|</span> <span class="kw-2">*</span><a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#135">region</a>)
             .<a class="ident" href="https://doc.rust-lang.org/nightly/core/iter/traits/iterator/trait.Iterator.html">collect</a>()
     }
 
     <span class="kw">fn</span> <span class="ident">location_to_point</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">location</span>: <a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/facts/mod.rs.html#42-45">RichLocation</a>) -&gt; <a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/facts/mod.rs.html#11">Point</a> {
-        <a class="self" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#97">self</a>.<span class="ident">facts</span>.<span class="ident">location_table</span>.<a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/facts/mod.rs.html#92">location_to_point</a>(<a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#97">location</a>)
+        <a class="self" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#139">self</a>.<span class="ident">facts</span>.<span class="ident">location_table</span>.<a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/facts/mod.rs.html#104">location_to_point</a>(<a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#139">location</a>)
     }
 
     <span class="kw">fn</span> <span class="ident">get_loan_live_at</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">location</span>: <a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/facts/mod.rs.html#42-45">RichLocation</a>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/facts/mod.rs.html#10">Loan</a><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">point</span> <span class="op">=</span> <a class="self" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#101">self</a>.<a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#97">location_to_point</a>(<a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#101">location</a>);
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">loans</span>) <span class="op">=</span> <a class="self" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#101">self</a>.<span class="ident">facts</span>.<span class="ident">output_facts</span>.<span class="ident">loan_live_at</span>.<span class="ident">get</span>(<span class="kw-2">&amp;</span><a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#102">point</a>) {
-            <a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#103">loans</a>.<a class="ident" href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html">clone</a>()
+        <span class="kw">let</span> <span class="ident">point</span> <span class="op">=</span> <a class="self" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#143">self</a>.<a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#139">location_to_point</a>(<a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#143">location</a>);
+        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">loans</span>) <span class="op">=</span> <a class="self" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#143">self</a>.<span class="ident">facts</span>.<span class="ident">output_facts</span>.<span class="ident">loan_live_at</span>.<span class="ident">get</span>(<span class="kw-2">&amp;</span><a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#144">point</a>) {
+            <a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#145">loans</a>.<a class="ident" href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html">clone</a>()
         } <span class="kw">else</span> {
             <span class="ident">Vec::new</span>()
         }
@@ -259,34 +365,57 @@
         <span class="kw-2">&amp;</span><span class="self">self</span>,
         <span class="ident">location</span>: <a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/facts/mod.rs.html#42-45">RichLocation</a>,
     ) -&gt; <span class="ident">BTreeMap</span><span class="op">&lt;</span><a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/facts/mod.rs.html#9">Region</a>, <span class="ident">BTreeSet</span><span class="op">&lt;</span><a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/facts/mod.rs.html#10">Loan</a><span class="op">&gt;</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">point</span> <span class="op">=</span> <a class="self" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#111">self</a>.<a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#97">location_to_point</a>(<a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#112">location</a>);
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">map</span>) <span class="op">=</span> <a class="self" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#111">self</a>.<span class="ident">facts</span>.<span class="ident">output_facts</span>.<span class="ident">origin_contains_loan_at</span>.<span class="ident">get</span>(<span class="kw-2">&amp;</span><a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#114">point</a>) {
-            <a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#115">map</a>.<a class="ident" href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html">clone</a>()
+        <span class="kw">let</span> <span class="ident">point</span> <span class="op">=</span> <a class="self" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#153">self</a>.<a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#139">location_to_point</a>(<a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#154">location</a>);
+        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">map</span>) <span class="op">=</span> <a class="self" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#153">self</a>.<span class="ident">facts</span>.<span class="ident">output_facts</span>.<span class="ident">origin_contains_loan_at</span>.<span class="ident">get</span>(<span class="kw-2">&amp;</span><a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#156">point</a>) {
+            <a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#157">map</a>.<a class="ident" href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html">clone</a>()
         } <span class="kw">else</span> {
             <span class="ident">BTreeMap::new</span>()
         }
     }
 
     <span class="kw">fn</span> <span class="ident">get_subset_base</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">location</span>: <a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/facts/mod.rs.html#42-45">RichLocation</a>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span>(<a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/facts/mod.rs.html#9">Region</a>, <a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/facts/mod.rs.html#9">Region</a>)<span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">point</span> <span class="op">=</span> <a class="self" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#122">self</a>.<a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#97">location_to_point</a>(<a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#122">location</a>);
-        <a class="self" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#122">self</a>.<span class="ident">facts</span>
+        <span class="kw">let</span> <span class="ident">point</span> <span class="op">=</span> <a class="self" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#164">self</a>.<a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#139">location_to_point</a>(<a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#164">location</a>);
+        <a class="self" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#164">self</a>.<span class="ident">facts</span>
             .<span class="ident">input_facts</span>
             .<span class="ident">subset_base</span>
             .<span class="ident">iter</span>()
-            .<a class="ident" href="https://doc.rust-lang.org/nightly/core/iter/traits/iterator/trait.Iterator.html">flat_map</a>(<span class="op">|</span><span class="kw-2">&amp;</span>(<span class="ident">r1</span>, <span class="ident">r2</span>, <span class="ident">p</span>)<span class="op">|</span> <span class="kw">if</span> <a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#128">p</a> <span class="op">==</span> <a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#123">point</a> { <span class="prelude-val">Some</span>((<a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#128">r1</a>, <a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#128">r2</a>)) } <span class="kw">else</span> { <span class="prelude-val">None</span> })
+            .<a class="ident" href="https://doc.rust-lang.org/nightly/core/iter/traits/iterator/trait.Iterator.html">flat_map</a>(<span class="op">|</span><span class="kw-2">&amp;</span>(<span class="ident">r1</span>, <span class="ident">r2</span>, <span class="ident">p</span>)<span class="op">|</span> <span class="kw">if</span> <span class="ident">p</span> <span class="op">==</span> <span class="ident">point</span> { <span class="prelude-val">Some</span>((<a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#170">r1</a>, <a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#170">r2</a>)) } <span class="kw">else</span> { <span class="prelude-val">None</span> })
             .<a class="ident" href="https://doc.rust-lang.org/nightly/core/iter/traits/iterator/trait.Iterator.html">collect</a>()
     }
 
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_subset_base_at_start</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">location</span>: <a class="ident" href="https://doc.rust-lang.org/nightly/nightly-rustc/rustc_middle/mir/struct.Location.html">mir::Location</a>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span>(<a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/facts/mod.rs.html#9">Region</a>, <a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/facts/mod.rs.html#9">Region</a>)<span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">rich_location</span> <span class="op">=</span> <a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/facts/mod.rs.html#43">RichLocation::Start</a>(<a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#132">location</a>);
-        <a class="self" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#132">self</a>.<a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#122">get_subset_base</a>(<a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#133">rich_location</a>)
+        <span class="kw">let</span> <span class="ident">rich_location</span> <span class="op">=</span> <a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/facts/mod.rs.html#43">RichLocation::Start</a>(<a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#174">location</a>);
+        <a class="self" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#174">self</a>.<a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#164">get_subset_base</a>(<a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#175">rich_location</a>)
     }
 
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_subset_base_at_mid</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">location</span>: <a class="ident" href="https://doc.rust-lang.org/nightly/nightly-rustc/rustc_middle/mir/struct.Location.html">mir::Location</a>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span>(<a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/facts/mod.rs.html#9">Region</a>, <a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/facts/mod.rs.html#9">Region</a>)<span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">rich_location</span> <span class="op">=</span> <a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/facts/mod.rs.html#44">RichLocation::Mid</a>(<a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#137">location</a>);
-        <a class="self" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#137">self</a>.<a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#122">get_subset_base</a>(<a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#138">rich_location</a>)
+        <span class="kw">let</span> <span class="ident">rich_location</span> <span class="op">=</span> <a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/facts/mod.rs.html#44">RichLocation::Mid</a>(<a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#179">location</a>);
+        <a class="self" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#179">self</a>.<a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#164">get_subset_base</a>(<a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#180">rich_location</a>)
+    }
+
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_lifetimes_dead_on_edge</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">from</span>: <a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/facts/mod.rs.html#42-45">RichLocation</a>, <span class="ident">to</span>: <a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/facts/mod.rs.html#42-45">RichLocation</a>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/facts/mod.rs.html#9">Region</a><span class="op">&gt;</span> {
+        <span class="kw">let</span> <span class="ident">from_point</span> <span class="op">=</span> <a class="self" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#184">self</a>.<a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#139">location_to_point</a>(<a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#184">from</a>);
+        <span class="kw">let</span> <span class="ident">to_point</span> <span class="op">=</span> <a class="self" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#184">self</a>.<a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#139">location_to_point</a>(<a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#184">to</a>);
+        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">from_origins</span>) <span class="op">=</span> <a class="self" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#184">self</a>
+            .<span class="ident">facts</span>
+            .<span class="ident">output_facts</span>
+            .<span class="ident">origin_live_on_entry</span>
+            .<span class="ident">get</span>(<span class="kw-2">&amp;</span><a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#185">from_point</a>)
+        {
+            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">to_origins</span>) <span class="op">=</span> <a class="self" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#184">self</a>.<span class="ident">facts</span>.<span class="ident">output_facts</span>.<span class="ident">origin_live_on_entry</span>.<span class="ident">get</span>(<span class="kw-2">&amp;</span><a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#186">to_point</a>) {
+                <a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#187">from_origins</a>
+                    .<span class="ident">iter</span>()
+                    .<a class="ident" href="https://doc.rust-lang.org/nightly/core/iter/traits/iterator/trait.Iterator.html">filter</a>(<span class="op">|</span><span class="ident">origin</span><span class="op">|</span> <span class="op">!</span><a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#193">to_origins</a>.<span class="ident">contains</span>(<a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#196">origin</a>))
+                    .<a class="ident" href="https://doc.rust-lang.org/nightly/core/iter/traits/iterator/trait.Iterator.html">cloned</a>()
+                    .<a class="ident" href="https://doc.rust-lang.org/nightly/core/iter/traits/iterator/trait.Iterator.html">collect</a>()
+            } <span class="kw">else</span> {
+                <a class="ident" href="../../../../../../src/prusti_interface/environment/mir_body/borrowck/lifetimes/mod.rs.html#187">from_origins</a>.<a class="ident" href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html">clone</a>()
+            }
+        } <span class="kw">else</span> {
+            <span class="ident">Vec::new</span>()
+        }
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../../" data-current-crate="prusti_interface" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0-nightly (42e1761c7 2022-05-15)" ></div>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../../" data-current-crate="prusti_interface" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0-nightly (7425fb293 2022-06-30)" ></div>
 </body></html>
